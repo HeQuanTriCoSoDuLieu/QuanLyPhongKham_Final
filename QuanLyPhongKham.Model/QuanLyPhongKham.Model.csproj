@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BCB820B0-53ED-4949-AEA9-B96D6817987A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QuanLyPhongKham.Model</RootNamespace>
+    <AssemblyName>QuanLyPhongKham.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTO\CanLamSan.cs" />
+    <Compile Include="DTO\LichSuKham_NhanVien.cs" />
+    <Compile Include="DTO\PhieuKham_LichSuKham.cs" />
+    <Compile Include="DTO\ChiTietDonThuoc_Thuoc.cs" />
+    <Compile Include="DTO\PhieuKham_BenhNhanLamSang.cs" />
+    <Compile Include="DTO\PhieuKham_BenhNhanTimKiem.cs" />
+    <Compile Include="DTO\PhieuKham_BenhNhanChoKham.cs" />
+    <Compile Include="DTO\BenhNhan.cs" />
+    <Compile Include="DTO\ChiTietCLS.cs" />
+    <Compile Include="DTO\ChiTietDonThuoc.cs" />
+    <Compile Include="DTO\ChiTietPhieuNhapThuoc.cs" />
+    <Compile Include="DTO\ChucDanh.cs" />
+    <Compile Include="DTO\ChucVu.cs" />
+    <Compile Include="DTO\Dichvucls.cs" />
+    <Compile Include="DTO\DonThuoc.cs" />
+    <Compile Include="DTO\Donvitinh.cs" />
+    <Compile Include="DTO\HinhThucKham.cs" />
+    <Compile Include="DTO\Khoa.cs" />
+    <Compile Include="DTO\LoaiCanLamSang.cs" />
+    <Compile Include="DTO\LoaiThuoc.cs" />
+    <Compile Include="DTO\NhaCungCap.cs" />
+    <Compile Include="DTO\NhanVien.cs" />
+    <Compile Include="DTO\ChiTietNhapVatTu.cs" />
+    <Compile Include="DTO\DanhSachKham.cs" />
+    <Compile Include="DTO\HangSanXuat.cs" />
+    <Compile Include="DTO\HoaDon.cs" />
+    <Compile Include="DTO\PhanQuyen.cs" />
+    <Compile Include="DTO\PhieuKham.cs" />
+    <Compile Include="DTO\PhieuNhap.cs" />
+    <Compile Include="DTO\QuocGia.cs" />
+    <Compile Include="DTO\TaiKhoan.cs" />
+    <Compile Include="DTO\Thuoc_Loaithuoc.cs" />
+
+    <Compile Include="DTO\TimKiemThuoc.cs" />
+
+    <Compile Include="DTO\Vattuyte_DVT.cs" />
+    <Compile Include="Interfaces\ITaiKhoanRepository.cs" />
+    <Compile Include="DTO\Thuoc.cs" />
+    <Compile Include="DTO\VatTuYTe.cs" />
+    <Compile Include="Interfaces\IBenhNhanRepository.cs" />
+    <Compile Include="Interfaces\ICanLamSanRepository.cs" />
+    <Compile Include="Interfaces\IChiTietCLSRepository.cs" />
+    <Compile Include="Interfaces\IChiTietDonThuocRepository.cs" />
+    <Compile Include="Interfaces\IChiTietNhapThuocRepository.cs" />
+    <Compile Include="Interfaces\IChiTietNhapVatTuRepository.cs" />
+    <Compile Include="Interfaces\IChucDanhRepository.cs" />
+    <Compile Include="Interfaces\IChucVuRepository.cs" />
+    <Compile Include="Interfaces\IDichVuCLSRepository.cs" />
+    <Compile Include="Interfaces\IDonThuocRepository.cs" />
+    <Compile Include="Interfaces\IDonViTinhRepository.cs" />
+    <Compile Include="Interfaces\IHangSanXuatRepository.cs" />
+    <Compile Include="Interfaces\IHinhThucKhamRepository.cs" />
+    <Compile Include="Interfaces\IHoaDonRepository.cs" />
+    <Compile Include="Interfaces\IKhoaRepository.cs" />
+    <Compile Include="Interfaces\ILoaiCanLamSangRepository.cs" />
+    <Compile Include="Interfaces\ILoaiThuocRepository.cs" />
+    <Compile Include="Interfaces\INhaCungCapRepository.cs" />
+    <Compile Include="Interfaces\INhanVienRepository.cs" />
+    <Compile Include="Interfaces\IPhanQuyenRepository.cs" />
+    <Compile Include="Interfaces\IPhieuKhamRepository.cs" />
+    <Compile Include="Interfaces\IPhieuNhapRepository.cs" />
+    <Compile Include="Interfaces\IQuocGiaRepository.cs" />
+    <Compile Include="Interfaces\IThuocRepository.cs" />
+    <Compile Include="Interfaces\IVatTuYTeRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI_DTO\PhieuKhamGUI.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="bin\Debug\QuanLyPhongKham.Model.dll.config" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\QuanLyPhongKham.Model.csproj.CopyComplete" />
+    <None Include="obj\Debug\QuanLyPhongKham.Model.csprojResolveAssemblyReference.cache" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\QuanLyPhongKham.Model.dll" />
+    <Content Include="bin\Debug\QuanLyPhongKham.Model.pdb" />
+    <Content Include="obj\Debug\QuanLyPhongKham.Model.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\QuanLyPhongKham.Model.dll" />
+    <Content Include="obj\Debug\QuanLyPhongKham.Model.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,115 @@
+﻿USE quanlyphongkham_final
+GO
+
+-------------------STORE-PROCEDURE----------------------------------------
+
+--1. Bảng PHANQUYEN
+--1.1 SP_INSERT_PHANQUYEN
+CREATE PROC SP_INSERT_PHANQUYEN
+@QUYEN INT,
+@GHICHU NVARCHAR(250)
+AS
+BEGIN
+	INSERT dbo.PHANQUYEN
+	        ( QUYEN, GHICHU )
+	VALUES  ( @QUYEN, -- QUYEN - int
+	          @GHICHU  -- GHICHU - nvarchar(250)
+	          )
+END
+GO
+
+SELECT COUNT(*) FROM dbo.TAIKHOAN
+GO
+
+
+
+--2. BẢNG TAIKHOAN
+--2.1 SPINSERT_TAIKHOAN
+CREATE PROC SP_INSERT_TAIKHOAN
+	@TENDANGNHAP VARCHAR(50),
+	@MATKHAU VARCHAR(50),
+	@TENHIENTHI NVARCHAR(50),
+	@MAPHANQUYEN int,
+	@TRANGTHAI BIT
+AS
+BEGIN
+	INSERT dbo.TAIKHOAN 
+	        ( TENDANGNHAP ,
+	          MATKHAU ,
+	          TENHIENTHI ,
+	          MAPHANQUYEN ,
+	          TRANGTHAI
+	        )
+	VALUES  ( @TENDANGNHAP , -- TENDANGNHAP - varchar(50)
+	          @MATKHAU , -- MATKHAU - varchar(50)
+	          @TENHIENTHI , -- TENHIENTHI - nvarchar(50)
+	          @MAPHANQUYEN , -- MAPHANQUYEN - int
+	          @TRANGTHAI  -- TRANGTHAI - bit
+	        )
+END
+GO
+
+
+--2.2 SP_LOGIN
+
+CREATE FUNCTION FN_Login(@username VARCHAR(50), @password VARCHAR(50))
+RETURNS INT 
+AS
+BEGIN
+	DECLARE @result INT
+	SELECT @result = P.QUYEN 
+	FROM dbo.TAIKHOAN T, dbo.PHANQUYEN P 
+	WHERE P.MAPHANQUYEN = T.MAPHANQUYEN AND MATKHAU = @password AND T.TENDANGNHAP = @username AND T.TRANGTHAI = 1
+	IF	@result IS NULL RETURN 0;
+	RETURN @result;
+END 
+GO
+
+
+CREATE PROC SP_LOGIN
+	@TenDangNhap VARCHAR(50),
+	@MatKhau VARCHAR(50)
+AS
+BEGIN
+	SELECT dbo.FN_Login(@TenDangNhap,@MatKhau)
+END
+GO
+
+
+--Bảng 3 BENHNHAN
+
+
+--3.1  SP_DanhSachBenhNhan
+CREATE  PROC SP_DanhSachBenhNhan
+AS
+BEGIN
+	SELECT	*
+	FROM dbo.BENHNHAN
+END
+GO
+
+
+
+
+ 
+-- 3.2 SP_TimKiemBenhNhan
+CREATE PROC SP_TimKiemBenhNhan
+	@TruongDuLieu VARCHAR(20),
+	@ThongTin NVARCHAR(250)
+ AS
+ BEGIN 
+
+	IF @TruongDuLieu = 'HOTEN'  SELECT * FROM dbo.BENHNHAN WHERE  HOTEN LIKE '%'+@ThongTin+'%'; 
+	IF @TruongDuLieu = 'MABN'  SELECT * FROM dbo.BENHNHAN WHERE  MABN LIKE '%'+@ThongTin+'%';
+	IF @TruongDuLieu = 'SODT'  SELECT * FROM dbo.BENHNHAN WHERE  SODT LIKE '%'+@ThongTin+'%';
+	IF @TruongDuLieu = 'SOCMND'  SELECT * FROM dbo.BENHNHAN WHERE  SOCMND LIKE '%'+@ThongTin+'%';
+ END
+ GO
+
+
+
+ 
+ SELECT B.HOTEN, B.NGAYSINH, B.GIOITINH, B.DIACHI, P.CHUANDOAN, N.HOTEN AS 'BACSI'
+ FROM dbo.PHIEUKHAM P JOIN dbo.BENHNHAN B ON B.MABN = P.MABN JOIN dbo.NHANVIEN N ON N.MANV = P.MANV 
+ GO
+ 
