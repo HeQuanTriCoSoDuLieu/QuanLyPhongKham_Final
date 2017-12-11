@@ -28,7 +28,15 @@ namespace QuanLyPhongKham.Winform
 
         private static List<ChiTietDonThuoc_Thuoc> sttListChiTietDonThuoc;
 
-        string link = @"F:\STUDY\ĐỒ ÁN NĂM  3\QUANLYPHONGKHAM\File";   // địa chỉ file kết quả
+        //string link = @"F:\STUDY\ĐỒ ÁN NĂM  3\QUANLYPHONGKHAM\File";   // địa chỉ file kết quả
+
+        string link = GetPath();
+        
+        /// <summary>
+        /// hàm lấy ra đường dẫn chứa file
+        /// </summary>
+        /// <returns></returns>
+       
 
         public string tenthuoc;
         public int mathuocft;
@@ -111,6 +119,7 @@ namespace QuanLyPhongKham.Winform
         }
         private void fKhamBenhNhan_Load(object sender, EventArgs e)
         {
+      
             LoadForm();
         }
         private void dgvdschokham_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -739,6 +748,17 @@ namespace QuanLyPhongKham.Winform
         #endregion
 
         #region Method
+
+        private static string GetPath()
+        {
+            var str = System.Windows.Forms.Application.StartupPath;
+            var splited = str.Split('\\');
+
+            splited = splited.Take(splited.Count() - 3).ToArray();
+
+            return string.Join("\\", splited) + "\\File\\";
+        }
+
         /// <summary>
         /// Hàm hiện thị panel lịch sử khám
         /// </summary>
