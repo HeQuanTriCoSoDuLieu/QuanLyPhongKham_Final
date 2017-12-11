@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fKhamBenhNhan));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Lịch sử khám                                  ");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Khám lâm sàng                              ");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("X - Quang                                   ");
@@ -623,6 +622,8 @@
             // 
             // pcbsieuam1
             // 
+            this.pcbsieuam1.ErrorImage = null;
+            this.pcbsieuam1.InitialImage = null;
             this.pcbsieuam1.Location = new System.Drawing.Point(525, 13);
             this.pcbsieuam1.Name = "pcbsieuam1";
             this.pcbsieuam1.Size = new System.Drawing.Size(227, 204);
@@ -778,7 +779,6 @@
             // 
             // pcbnoisoi2
             // 
-            this.pcbnoisoi2.Image = ((System.Drawing.Image)(resources.GetObject("pcbnoisoi2.Image")));
             this.pcbnoisoi2.Location = new System.Drawing.Point(529, 229);
             this.pcbnoisoi2.Name = "pcbnoisoi2";
             this.pcbnoisoi2.Size = new System.Drawing.Size(227, 206);
@@ -787,7 +787,6 @@
             // 
             // pcbnoisoi1
             // 
-            this.pcbnoisoi1.Image = ((System.Drawing.Image)(resources.GetObject("pcbnoisoi1.Image")));
             this.pcbnoisoi1.Location = new System.Drawing.Point(529, 5);
             this.pcbnoisoi1.Name = "pcbnoisoi1";
             this.pcbnoisoi1.Size = new System.Drawing.Size(227, 206);
@@ -1017,7 +1016,6 @@
             // pcbxquang2
             // 
             this.pcbxquang2.ErrorImage = null;
-            this.pcbxquang2.Image = global::QuanLyPhongKham.Winform.Properties.Resources.TEST;
             this.pcbxquang2.InitialImage = null;
             this.pcbxquang2.Location = new System.Drawing.Point(423, 45);
             this.pcbxquang2.Name = "pcbxquang2";
@@ -1028,7 +1026,6 @@
             // pcbxquang1
             // 
             this.pcbxquang1.ErrorImage = null;
-            this.pcbxquang1.Image = global::QuanLyPhongKham.Winform.Properties.Resources.TEST;
             this.pcbxquang1.InitialImage = null;
             this.pcbxquang1.Location = new System.Drawing.Point(61, 45);
             this.pcbxquang1.Name = "pcbxquang1";

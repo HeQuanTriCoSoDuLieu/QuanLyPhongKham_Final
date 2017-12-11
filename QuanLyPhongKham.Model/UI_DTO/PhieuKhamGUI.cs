@@ -1,32 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace QuanLyPhongKham.Model.DTO
+namespace QuanLyPhongKham.Model.UI_DTO.fTiepNhanBenhNhan
 {
     public class PhieuKhamGUI
     {
-        public PhieuKhamGUI(int maPhieuKham, string hoTen, string diaChi, string gioiTinh, DateTime ngaySinh, string chuanDoan, string hinhThucKham, string bacSi)
-        {
-            MaPhieuKham = maPhieuKham;
-            HoTen = hoTen;
-            DiaChi = diaChi;
-            GioiTinh = gioiTinh;
-            NgaySinh = ngaySinh;
-            ChuanDoan = chuanDoan;
-            HinhThucKham = hinhThucKham;
-            BacSi = bacSi;
-        }
-
         public PhieuKhamGUI()
         {
         }
-
-
 
         public PhieuKhamGUI(DataRow row)
         {
@@ -40,11 +22,11 @@ namespace QuanLyPhongKham.Model.DTO
             BacSi = row["BACSI"].ToString();
             SOCMND = row["SOCMND"].ToString();
             SoDT = row["SODT"].ToString();
-            MaBN = (int) row["MaBN"];
+            MaBN = (int)row["MaBN"];
+            DanToc = row["DANTOC"].ToString();
+            NgayKham = DateTime.ParseExact(row["NGAYKHAM"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            KetLuan = row["KETLUAN"].ToString();
         }
-
-
-
 
         public int MaPhieuKham { get; set; }
         public string HoTen { get; set; }
@@ -57,6 +39,8 @@ namespace QuanLyPhongKham.Model.DTO
         public int MaBN { get; set; }
         public string SOCMND { get; set; }
         public string SoDT { get; set; }
-
+        public string DanToc { get; set; }
+        public DateTime NgayKham { get; set; }
+        public string KetLuan { get; set; }
     }
 }

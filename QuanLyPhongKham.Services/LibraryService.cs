@@ -1,10 +1,8 @@
-﻿using QuanLyPhongKham.Model.Interfaces;
+﻿using QuanLyPhongKham.Model.DTO;
+using QuanLyPhongKham.Model.Interfaces;
+using QuanLyPhongKham.Model.UI_DTO.fTiepNhanBenhNhan;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using QuanLyPhongKham.Model.DTO;
 using System.Data;
 
 namespace QuanLyPhongKham.Services
@@ -20,8 +18,6 @@ namespace QuanLyPhongKham.Services
         ITaiKhoanRepository, IThuocRepository, IVatTuYTeRepository,
         IPhanQuyenRepository, IPhieuKhamRepository
     {
-
-
         #region Repositories
 
         private IBenhNhanRepository benhNhanRepository;
@@ -52,14 +48,13 @@ namespace QuanLyPhongKham.Services
         private IThuocRepository thuocRepository;
         private IVatTuYTeRepository vatTuYTeRepository;
 
-
-        #endregion
-
-
+        #endregion Repositories
 
         #region constructor
 
-        internal LibraryService() { }
+        internal LibraryService()
+        {
+        }
 
         internal LibraryService(IBenhNhanRepository benhNhanRepository, ICanLamSanRepository canLamSanRepository, IChiTietCLSRepository chiTietCLSRepository, IChiTietDonThuocRepository chiTietDonThuocRepository, IChiTietNhapVatTuRepository chiTietNhapVatTuRepository, IChiTietNhapThuocRepository chiTietNhapThuocRepository, IChucDanhRepository chucDanhRepository, IChucVuRepository chucVuRepository, IDichVuCLSRepository dichVuCLSRepository, IDonThuocRepository donThuocRepository, IDonViTinhRepository donViTinhRepository, IHangSanXuatRepository hangSanXuatRepository, IHinhThucKhamRepository hinhThucKhamRepository, IHoaDonRepository hoaDonRepository, IKhoaRepository khoaRepository, ILoaiCanLamSangRepository loaiCanLamSanRepository, ILoaiThuocRepository loaiThuocRepository, INhaCungCapRepository nhaCungCapRepository, INhanVienRepository nhanVienRepository, IPhanQuyenRepository phanQuyenRepository, IPhieuKhamRepository phieuKhamRepository, IPhieuNhapRepository phieuNhapRepository, IQuocGiaRepository quocGiaRepository, ITaiKhoanRepository taiKhoanRepository, IThuocRepository thuocRepository, IVatTuYTeRepository vatTuYTeRepository)
         {
@@ -91,32 +86,23 @@ namespace QuanLyPhongKham.Services
             this.vatTuYTeRepository = vatTuYTeRepository;
         }
 
-
-        #endregion
-
-
+        #endregion constructor
 
         #region Services cho tài khoản
+
         public DataTable Login(string userName, string passWord)
         {
             return taiKhoanRepository.Login(userName, passWord);
         }
 
-
-
-
-
-        #endregion
-
-
+        #endregion Services cho tài khoản
 
         #region BenhNhanServices
+
         public List<BenhNhan> DanhSachBenhNhan()
         {
             return benhNhanRepository.DanhSachBenhNhan();
         }
-
-
 
         public List<BenhNhan> TimKiemBenhNhan(string col, string info)
         {
@@ -133,12 +119,10 @@ namespace QuanLyPhongKham.Services
             return benhNhanRepository.UpdateBenhNhan(benhNhan);
         }
 
-
-
-
-        #endregion
+        #endregion BenhNhanServices
 
         #region PhieuKhamServices
+
         /// <summary>
         /// load danh sach kham cho fTiepNhanBenhNhan
         /// </summary>
@@ -165,14 +149,13 @@ namespace QuanLyPhongKham.Services
         }
 
         public List<PhieuKham_BenhNhanChoKham> DanhSachChoKham(int manv, string date)
-        { 
-            return phieuKhamRepository.DanhSachChoKham(manv,date);
+        {
+            return phieuKhamRepository.DanhSachChoKham(manv, date);
         }
-
 
         public List<PhieuKham_BenhNhanTimKiem> KetQuaTimPhieuKham(string ten, int manv)
         {
-            return phieuKhamRepository.KetQuaTimPhieuKham(ten,manv);
+            return phieuKhamRepository.KetQuaTimPhieuKham(ten, manv);
         }
         public List<PhieuKham_BenhNhanLamSang> ThongTinPhieuKham()
         {
@@ -185,7 +168,7 @@ namespace QuanLyPhongKham.Services
             return row;
         }
 
-        public List<PhieuKham_LichSuKham>LichSuKham(int mabn)
+        public List<PhieuKham_LichSuKham> LichSuKham(int mabn)
         {
             return phieuKhamRepository.LichSuKham(mabn);
         }
@@ -200,17 +183,24 @@ namespace QuanLyPhongKham.Services
             return phieuKhamRepository.HoanThanhPhieuKham(maphieu);
         }
 
-
         public List<HinhThucKham> DanhSachHinhThucKham()
         {
             return hinhThucKhamRepository.DanhSachHinhThucKham();
         }
 
+        public List<PhieuKhamGUI> LichSuTiepNhanByID(int id)
+        {
+            return phieuKhamRepository.LichSuTiepNhanByID(id);
+        }
 
-        #endregion
+        public List<PhieuKhamGUI> TimKiemLichSuTiepNhan(int maNV, string column, string value)
+        {
+            return phieuKhamRepository.TimKiemLichSuTiepNhan(maNV,column,value);
+        }
+
+        #endregion PhieuKhamServices
 
         #region DonThuocServices
-
 
         public int ThemDonThuoc(DonThuoc donthuoc)
         {
@@ -229,21 +219,14 @@ namespace QuanLyPhongKham.Services
             return chiTietDonThuocRepository.DanhSachChiTietDonThuoc(maphieu);
         }
 
-
-
-        #endregion
-
-
-
-
-
+        #endregion DonThuocServices
 
         #region CAN LAM SANG Services
+
         public List<CanLamSan> DanhSachLoaiCLS(int macls)
         {
             return canLamSanRepository.DanhSachLoaiCLS(macls);
         }
-
 
         public int InsertChiTietCLS(string getmaphieu, string getmacls, string link)
         {
@@ -255,20 +238,18 @@ namespace QuanLyPhongKham.Services
             return canLamSanRepository.GetCLS(filePath);
         }
 
-
         public ChiTietCLS LayketQua(string maphieu, string macls)
         {
             return chiTietCLSRepository.LayketQua(maphieu, macls);
         }
-        #endregion
 
-
+        #endregion CAN LAM SANG Services
 
         #region NhanVienServices
 
         public List<LichSuKham_NhanVien> LichSuKhamNhanVien(string col, string value, int manv)
         {
-            return nhanVienRepository.LichSuKhamNhanVien(col,value,manv);
+            return nhanVienRepository.LichSuKhamNhanVien(col, value, manv);
         }
 
         public List<LichSuKham_NhanVien> LichSuKhamNhanVien(int manv)
@@ -281,10 +262,10 @@ namespace QuanLyPhongKham.Services
             return nhanVienRepository.DanhSachNhanVien();
         }
 
-        #endregion
-
+        #endregion NhanVienServices
 
         #region form tìm kiếm thuốc
+
         public List<TimKiemThuoc> TimKiemThuoc(string timkiemthuoc, int timtheo, int loaithuoc)
         {
             return thuocRepository.TimKiemThuoc(timkiemthuoc, timtheo, loaithuoc);
@@ -294,7 +275,8 @@ namespace QuanLyPhongKham.Services
         //{
         //    return chiTietDonThuocRepository.ThemThuoc(madonthuoc, mathuoc, soluong, huongdan);
         //}
-        #endregion
+
+        #endregion form tìm kiếm thuốc
 
         #region VatTuYTeServices
 
@@ -303,13 +285,15 @@ namespace QuanLyPhongKham.Services
             return vatTuYTeRepository.DanhsachVTYT();
         }
 
-
         public List<Vattuyte_DVT> TimkiemVTYT(string thongtin, string dulieu)
         {
             return vatTuYTeRepository.TimkiemVTYT(thongtin, dulieu);
         }
 
-        #endregion
+        
+
+        #endregion VatTuYTeServices
+
         #region ThuocServices
 
         //public List<Thuoc_Loaithuoc> Danhsachthuoc()
@@ -317,14 +301,11 @@ namespace QuanLyPhongKham.Services
         //    return thuocRepository.Danhsachthuoc();
         //}
 
-
-
         //public List<Thuoc_Loaithuoc> Danhsachthuoc(string Thongtin, string Dulieu)
         //{
         //    return thuocRepository.Danhsachthuoc(Thongtin, Dulieu);
         //}
-        #endregion
 
+        #endregion ThuocServices
     }
 }
-

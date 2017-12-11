@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using QuanLyPhongKham.Model.DTO;
 using System.Data;
+using QuanLyPhongKham.Model.UI_DTO.fTiepNhanBenhNhan;
 
 namespace QuanLyPhongKham.Repository.ADO
 {
@@ -174,6 +175,31 @@ namespace QuanLyPhongKham.Repository.ADO
             DataProvider.Instane.ExecuteNonQuery("EXEC dbo.SP_UpdatePhieuKham @MAPHIEUKHAM , @MANV , @NVTIEPNHAN , @CHUANDOAN , @MAHINHTHUCKHAM", new object[] { phieuKham.MaPhieuKham, phieuKham.MaNV, phieuKham.NVTiepNhan, phieuKham.ChuanDoan, phieuKham.MaHinhThucKham });
         }
 
+        public List<PhieuKhamGUI> LichSuTiepNhanByID(int id)
+        {
+            DataTable table = DataProvider.Instane.ExecuteReader("EXEC dbo.SP_LoadLichSuTiepNhanByID @MANV",new object[] { id });
+            List<PhieuKhamGUI> list = new List<PhieuKhamGUI>();
+            foreach (DataRow item in table.Rows)
+            {
+                PhieuKhamGUI phieuKhamGUI = new PhieuKhamGUI(item);
+                list.Add(phieuKhamGUI);
+            }
+
+            return list;
+        }
+
+        public List<PhieuKhamGUI> TimKiemLichSuTiepNhan(int maNV,string column, string value)
+        {
+            DataTable table = DataProvider.Instane.ExecuteReader("EXEC dbo.TimKiemLichSuTiepNhan @MaNV ,  @TruongDuLieu  , @ThongTin ", new object[] { maNV,column, value});
+            List<PhieuKhamGUI> list = new List<PhieuKhamGUI>();
+            foreach (DataRow item in table.Rows)
+            {
+                PhieuKhamGUI phieuKhamGUI = new PhieuKhamGUI(item);
+                list.Add(phieuKhamGUI);
+            }
+
+            return list;
+        }
     }
 }
 

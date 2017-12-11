@@ -8,46 +8,39 @@ namespace QuanLyPhongKham.Model.DTO
 {
     public class TaiKhoan
     {
-
-        /// <summary>
-        /// làm thêm cái này 
-        /// </summary>
-        public TaiKhoan() { }
-
-        /// <summary>
-        /// làm thêm cái này 
-        /// </summary>
-        public TaiKhoan(int mATK, string tENDANGNHAP, string mATKHAU, string tENHIENTHI, int mAPHANQUYEN, bool tRANGTHAI)
+        public TaiKhoan(int maTK, int maNV, string tenDangNhap, string matKhau, string tenHienThi, int maPhanQuyen, bool trangThai)
         {
-            MATK = mATK;
-            TENDANGNHAP = tENDANGNHAP;
-            MATKHAU = mATKHAU;
-            TENHIENTHI = tENHIENTHI;
-            MAPHANQUYEN = mAPHANQUYEN;
-            TRANGTHAI = tRANGTHAI;
+            MaTK = maTK;
+            MaNV = maNV;
+            TenDangNhap = tenDangNhap;
+            MatKhau = matKhau;
+            TenHienThi = tenHienThi;
+            MaPhanQuyen = maPhanQuyen;
+            TrangThai = trangThai;
         }
 
-
-        /// <summary>
-        /// dùng cho query data từ database
-        /// </summary>
-        /// <param name="row"></param>
         public TaiKhoan(DataRow row)
         {
-            MATK = (int)row["MATK"];
-            TENDANGNHAP = row["TENDANGNHAP"].ToString();
-            MATKHAU = row["MATKHAU"].ToString();
-            TENHIENTHI = row["TENHIENTHI"].ToString();
-            MAPHANQUYEN = (int)row["MAPHANQUYEN"];
-            TRANGTHAI = (bool)row["TRANGTHAI"];
+            MaTK = (int)row["MATK"];
+            MaNV = (int)row["MANV"];
+            TenDangNhap = (string)row["TENDANGNHAP"];
+            MatKhau = (string)row["MATKHAU"];
+            TenHienThi = (string)row["TENHIENTHI"];
+            MaPhanQuyen = (int)row["MAPHANQUYEN"];
+            TrangThai = (bool)row["TRANGTHAI"];
         }
 
-        public int MATK { get; set; }
-        public string TENDANGNHAP { get; set; }
-        public string MATKHAU { get; set; }
-        public string TENHIENTHI { get; set; }
-        public int MAPHANQUYEN { get; set; }
-        public bool TRANGTHAI { get; set; }
+        public TaiKhoan() { }
+
+
+
+        public int MaTK { get; set; }
+        public int MaNV { get; set; }
+        public string TenDangNhap { get; set; }
+        public string MatKhau { get; set; }
+        public string TenHienThi { get; set; }
+        public int MaPhanQuyen { get; set; }
+        public bool TrangThai { get; set; }
 
     }
 }

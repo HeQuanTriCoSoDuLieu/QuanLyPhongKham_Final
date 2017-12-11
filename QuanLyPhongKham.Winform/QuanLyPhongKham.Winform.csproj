@@ -39,12 +39,6 @@
     <StartupObject>QuanLyPhongKham.Winform.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
@@ -53,6 +47,11 @@
     </Reference>
     <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -84,6 +83,12 @@
     <Compile Include="fAddEditBenhNhan.Designer.cs">
       <DependentUpon>fAddEditBenhNhan.cs</DependentUpon>
     </Compile>
+    <Compile Include="fAddEditPhieuKham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fAddEditPhieuKham.Designer.cs">
+      <DependentUpon>fAddEditPhieuKham.cs</DependentUpon>
+    </Compile>
     <Compile Include="fAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,11 +107,23 @@
     <Compile Include="fLichSuKhamBacSi.Designer.cs">
       <DependentUpon>fLichSuKhamBacSi.cs</DependentUpon>
     </Compile>
+    <Compile Include="fLichSuTiepNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fLichSuTiepNhan.Designer.cs">
+      <DependentUpon>fLichSuTiepNhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="fLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="fLogin.Designer.cs">
       <DependentUpon>fLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fTiepNhanBenhNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fTiepNhanBenhNhan.Designer.cs">
+      <DependentUpon>fTiepNhanBenhNhan.cs</DependentUpon>
     </Compile>
     <Compile Include="fTimKiemThuoc.cs">
       <SubType>Form</SubType>
@@ -120,16 +137,13 @@
     <Compile Include="fThuNgan.Designer.cs">
       <DependentUpon>fThuNgan.cs</DependentUpon>
     </Compile>
-    <Compile Include="fTiepNhanBenhNhan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="fTiepNhanBenhNhan.Designer.cs">
-      <DependentUpon>fTiepNhanBenhNhan.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="fAddEditBenhNhan.resx">
       <DependentUpon>fAddEditBenhNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fAddEditPhieuKham.resx">
+      <DependentUpon>fAddEditPhieuKham.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fKhamBenhNhan.resx">
       <DependentUpon>fKhamBenhNhan.cs</DependentUpon>
@@ -138,14 +152,17 @@
     <EmbeddedResource Include="fLichSuKhamBacSi.resx">
       <DependentUpon>fLichSuKhamBacSi.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="fLichSuTiepNhan.resx">
+      <DependentUpon>fLichSuTiepNhan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fLogin.resx">
       <DependentUpon>fLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fTimKiemThuoc.resx">
-      <DependentUpon>fTimKiemThuoc.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="fTiepNhanBenhNhan.resx">
       <DependentUpon>fTiepNhanBenhNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fTimKiemThuoc.resx">
+      <DependentUpon>fTimKiemThuoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
