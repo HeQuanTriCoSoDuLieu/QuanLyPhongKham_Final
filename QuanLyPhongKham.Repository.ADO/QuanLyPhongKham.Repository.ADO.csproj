@@ -54,7 +54,6 @@
     <Compile Include="DonViTinhRepository.cs" />
     <Compile Include="HangSanXuatRepository.cs" />
     <Compile Include="HinhThucKhamRepository.cs" />
-    <Compile Include="HoaDonRepository.cs" />
     <Compile Include="KhoaRepository.cs" />
     <Compile Include="LoaiCanLamSangRepository.cs" />
     <Compile Include="LoaiThuocRepository.cs" />

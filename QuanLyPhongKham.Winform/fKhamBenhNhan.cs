@@ -756,7 +756,7 @@ namespace QuanLyPhongKham.Winform
 
             splited = splited.Take(splited.Count() - 3).ToArray();
 
-            return string.Join("\\", splited) + "\\File\\";
+            return string.Join("\\", splited) + "\\";
         }
 
         /// <summary>

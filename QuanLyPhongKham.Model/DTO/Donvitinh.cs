@@ -12,15 +12,15 @@ namespace QuanLyPhongKham.Model.DTO
         public DonViTinh() { }
         public DonViTinh(int madvt, String tendvt)
         {
-            MADVT = madvt;
-            TENDVT = tendvt;
+            MaDVT = madvt;
+            TenDVT = tendvt;
         }
         public DonViTinh(DataRow row)
         {
-            MADVT = (int)row["MADVT"];
-            TENDVT = row["TENDVT"].ToString();
+            MaDVT = (int)row["MADVT"];
+            TenDVT = row["TENDVT"].ToString();
         }
-        public int MADVT { get; set; }
-        public string TENDVT { get; set; }
+        public int MaDVT { get; set; }
+        public string TenDVT { get; set; }
     }
 }
