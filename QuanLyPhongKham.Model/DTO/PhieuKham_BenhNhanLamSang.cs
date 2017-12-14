@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,6 +64,7 @@ namespace QuanLyPhongKham.Model.DTO
             this.ChieuCao = row["CHIEUCAO"].ToString();
             this.MaICD = row["MAICD"].ToString();
             this.NgayKham = (DateTime)row["NGAYKHAM"];
+            this.NgayKham = DateTime.ParseExact(NgayKham.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
             this.HoanThanh = row["HOANTHANH"].ToString();
             this.DaThanhToan = row["DATHANHTOAN"].ToString();
             this.KetLuan = row["KETLUAN"].ToString();

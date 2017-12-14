@@ -94,6 +94,10 @@ namespace QuanLyPhongKham.Services
         {
             return taiKhoanRepository.Login(userName, passWord);
         }
+        public int DoiMatKhau(string userName,string passWord, string newPassWord,int manv)
+        {
+            return taiKhoanRepository.DoiMatKhau(userName, passWord, newPassWord, manv);
+        }
 
         #endregion Services cho tài khoản
 

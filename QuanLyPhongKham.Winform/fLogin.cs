@@ -53,7 +53,7 @@ namespace QuanLyPhongKham.Winform
                     break;
 
                 case 2:
-                    fKhamBenhNhan khamBenhNhan = new fKhamBenhNhan(id);
+                    fKhamBenhNhan khamBenhNhan = new fKhamBenhNhan(id,userName, passWord);
                     Hide();
                     khamBenhNhan.ShowDialog();
                     Show();
