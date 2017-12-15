@@ -41,12 +41,15 @@
   <ItemGroup>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -137,6 +140,12 @@
     <Compile Include="fLogin.Designer.cs">
       <DependentUpon>fLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="fDoiMatKhauNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fDoiMatKhauNhanVien.Designer.cs">
+      <DependentUpon>fDoiMatKhauNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="fTiepNhanBenhNhan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +199,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fThuNgan.resx">
       <DependentUpon>fThuNgan.cs</DependentUpon>
+    <EmbeddedResource Include="fDoiMatKhauNhanVien.resx">
+      <DependentUpon>fDoiMatKhauNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fTiepNhanBenhNhan.resx">
       <DependentUpon>fTiepNhanBenhNhan.cs</DependentUpon>
