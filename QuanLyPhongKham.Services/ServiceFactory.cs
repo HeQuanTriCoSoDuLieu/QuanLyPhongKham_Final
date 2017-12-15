@@ -27,7 +27,7 @@ namespace QuanLyPhongKham.Services
                                                     new QuanLyPhongKham.Repository.ADO.DonViTinhRepository(),
                                                     new QuanLyPhongKham.Repository.ADO.HangSanXuatRepository(),
                                                     new QuanLyPhongKham.Repository.ADO.HinhThucKhamRepository(),
-                                                    new QuanLyPhongKham.Repository.ADO.HoaDonRepository(),
+                                                   
                                                     new QuanLyPhongKham.Repository.ADO.KhoaRepository(),
                                                     new QuanLyPhongKham.Repository.ADO.LoaiCanLamSangRepository(),
                                                     new QuanLyPhongKham.Repository.ADO.LoaiThuocRepository(),

@@ -93,7 +93,6 @@
     <Compile Include="Interfaces\IDonViTinhRepository.cs" />
     <Compile Include="Interfaces\IHangSanXuatRepository.cs" />
     <Compile Include="Interfaces\IHinhThucKhamRepository.cs" />
-    <Compile Include="Interfaces\IHoaDonRepository.cs" />
     <Compile Include="Interfaces\IKhoaRepository.cs" />
     <Compile Include="Interfaces\ILoaiCanLamSangRepository.cs" />
     <Compile Include="Interfaces\ILoaiThuocRepository.cs" />
@@ -106,25 +105,16 @@
     <Compile Include="Interfaces\IThuocRepository.cs" />
     <Compile Include="Interfaces\IVatTuYTeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI_DTO\ChiTietThuocGUI.cs" />
+    <Compile Include="UI_DTO\DichVuCLSGUI.cs" />
+    <Compile Include="UI_DTO\DonThuocGUI.cs" />
     <Compile Include="UI_DTO\PhieuKhamGUI.cs" />
+    <Compile Include="UI_DTO\ThuocGUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="bin\Debug\QuanLyPhongKham.Model.dll.config" />
-    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="obj\Debug\QuanLyPhongKham.Model.csproj.CopyComplete" />
-    <None Include="obj\Debug\QuanLyPhongKham.Model.csprojResolveAssemblyReference.cache" />
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="bin\Debug\QuanLyPhongKham.Model.dll" />
-    <Content Include="bin\Debug\QuanLyPhongKham.Model.pdb" />
-    <Content Include="obj\Debug\QuanLyPhongKham.Model.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\QuanLyPhongKham.Model.dll" />
-    <Content Include="obj\Debug\QuanLyPhongKham.Model.pdb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Release\" />
-    <Folder Include="obj\Debug\TempPE\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

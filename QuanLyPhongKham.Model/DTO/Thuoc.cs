@@ -13,29 +13,29 @@ namespace QuanLyPhongKham.Model.DTO
 
         public Thuoc(int Mathuoc, String Tenthuoc, int Donvitinh, int Loaithuoc, int Soluongton, String Ghichu)
         {
-            MATHUOC = Mathuoc;
-            TENTHUOC = Tenthuoc;
-            DONVITINH = Donvitinh;
-            LOAITHUOC = Loaithuoc;
-            SOLUONGTON = Soluongton;
-            GHICHU = Ghichu;
+            MaThuoc = Mathuoc;
+            TenThuoc = Tenthuoc;
+            DonViTinh = Donvitinh;
+            LoaiThuoc = Loaithuoc;
+            SoLuongTon = Soluongton;
+            GhiChu = Ghichu;
         }
 
         public Thuoc(DataRow row)
         {
-            MATHUOC = (int)row["MATHUOC"];
-            TENTHUOC = row["TENTHUOC"].ToString();
-            DONVITINH = (int)row["DONVITINH"];
-            LOAITHUOC = (int)row["LOAITHUOC"];
-            SOLUONGTON = (int)row["SOLUONGTON"];
-            GHICHU = row["GHICHU"].ToString();
+            MaThuoc = (int)row["MATHUOC"];
+            TenThuoc = row["TENTHUOC"].ToString();
+            DonViTinh = (int)row["DONVITINH"];
+            LoaiThuoc = (int)row["LOAITHUOC"];
+            SoLuongTon = (int)row["SOLUONGTON"];
+            GhiChu = row["GHICHU"].ToString();
         }
 
-        public int MATHUOC { get; set; }
-        public string TENTHUOC { get; set; }
-        public int DONVITINH { get; set; }
-        public int LOAITHUOC { get; set; }
-        public int SOLUONGTON { get; set; }
-        public string GHICHU { get; set; }
+        public int MaThuoc { get; set; }
+        public string TenThuoc { get; set; }
+        public int DonViTinh { get; set; }
+        public int LoaiThuoc { get; set; }
+        public int SoLuongTon { get; set; }
+        public string GhiChu { get; set; }
     }
 }

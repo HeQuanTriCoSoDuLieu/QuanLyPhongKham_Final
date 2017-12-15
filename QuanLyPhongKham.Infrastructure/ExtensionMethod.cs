@@ -53,7 +53,7 @@ namespace QuanLyPhongKham.Infrastructure
                 Microsoft.Office.Interop.Excel.Range ten = worksheet.get_Range("B2", "B2");
                 ten.Value = "Tên nhân viên";
                 Microsoft.Office.Interop.Excel.Range tenNhanVienValue = worksheet.get_Range("C2", "C2");
-                tenNhanVienValue.Value = ten;
+                tenNhanVienValue.Value = tenNhanVien;
                 Microsoft.Office.Interop.Excel.Range date = worksheet.get_Range("B3", "B3");
                 date.Value = "Ngày tạo";
                 Microsoft.Office.Interop.Excel.Range dateValue = worksheet.get_Range("C3", "C3");
