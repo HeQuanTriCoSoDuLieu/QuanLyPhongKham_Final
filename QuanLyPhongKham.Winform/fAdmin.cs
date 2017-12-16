@@ -4,24 +4,21 @@ using QuanLyPhongKham.Model.UI_DTO;
 using QuanLyPhongKham.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyPhongKham.Winform
 {
     public partial class fAdmin : Form
     {
-
         #region Global vars
-        TaiKhoan taiKhoan;
-        LibraryService libraryService;
-        static List<ThuocGUI> listThuoc;
-        #endregion
+
+        private TaiKhoan taiKhoan;
+        private LibraryService libraryService;
+        private static List<ThuocGUI> listThuoc;
+        public static List<ChiTietThuocGUI> listChiTietThuoc;
+
+        #endregion Global vars
 
         public fAdmin(TaiKhoan taiKhoan)
         {
@@ -31,6 +28,8 @@ namespace QuanLyPhongKham.Winform
 
             txtTimKiemThuoc.Focus();
             cbbTimKiemThuoc.SelectedIndex = 1;
+
+            listChiTietThuoc = new List<ChiTietThuocGUI>();
 
             //load danh sach thuoc
             listThuoc = libraryService.DanhSachThuoc();
@@ -46,6 +45,7 @@ namespace QuanLyPhongKham.Winform
                 dgvThuoc.Rows.Add(stt++, item.MaThuoc, item.TenThuoc, item.SoLuongTon, item.DonViTinh, item.LoaiThuoc);
             }
         }
+
         #region Events
 
         private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,10 +58,6 @@ namespace QuanLyPhongKham.Winform
             ExtensionMethod.ExportToExcel(dgvThuoc, "Danh sách thuốc", taiKhoan.TenHienThi, DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "danhsachthuoc");
         }
 
-
-
-
-
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             int number = cbbTimKiemThuoc.SelectedIndex;
@@ -71,9 +67,11 @@ namespace QuanLyPhongKham.Winform
                 case 0:
                     LoadDanhSachThuoc(listThuoc);
                     break;
+
                 case 1:
                     column = "MATHUOC";
                     break;
+
                 case 2:
                     column = "TENTHUOC";
                     break;
@@ -95,38 +93,123 @@ namespace QuanLyPhongKham.Winform
                     {
                         LoadDanhSachThuoc(listThuocTemp);
                     }
-
                 }
-
             }
         }
 
         private void btnChiTiet_Click(object sender, EventArgs e)
         {
-            if (dgvThuoc.SelectedRows.Count>0)
+            if (dgvThuoc.SelectedRows.Count > 0)
             {
-                int maThuoc = (int) dgvThuoc.SelectedRows[0].Cells[1].Value;
+                int maThuoc = (int)dgvThuoc.SelectedRows[0].Cells[1].Value;
                 fChiTietThuoc f = new fChiTietThuoc(maThuoc);
                 Hide();
                 f.ShowDialog();
                 Show();
             }
-           
         }
 
-        #endregion
+        #endregion Events
 
-       
+        #region Quản lý thuốc
 
         private void btnThemThuoc_Click(object sender, EventArgs e)
         {
-            
             fAddEditThuoc f = new fAddEditThuoc();
             f.ShowDialog();
             if (f.DialogResult == DialogResult.OK)
             {
                 listThuoc = libraryService.DanhSachThuoc();
                 LoadDanhSachThuoc(listThuoc);
+            }
+        }
+
+        #endregion Quản lý thuốc
+
+        #region nhập thuốc
+
+        private void btnThemThuocPhieuNhap_Click(object sender, EventArgs e)
+        {
+            fChiTietPhieuNhapThuoc f = new fChiTietPhieuNhapThuoc();
+            f.ShowDialog();
+            if (f.DialogResult == DialogResult.OK)
+            {
+                //load lại danh sách chi tiết nhập thuốc
+                LoadChiTietNhapThuoc(listChiTietThuoc);
+            }
+        }
+
+        private void LoadChiTietNhapThuoc(List<ChiTietThuocGUI> listChiTietThuocGUI)
+        {
+            dgvChiTietPhieuNhap.Rows.Clear();
+            int stt = 1;
+            foreach (ChiTietThuocGUI item in listChiTietThuocGUI)
+            {
+                dgvChiTietPhieuNhap.Rows.Add(stt++, item.MaThuoc, item.TenThuoc, item.SoLuong, item.NgaySX, item.NgayHH, item.GiaNhap, item.GiaBanLe, item.TenHSX, item.TenNhaCC);
+            }
+        }
+
+        #endregion nhập thuốc
+
+        private void btnXoaThuocPhieuNhap_Click(object sender, EventArgs e)
+        {
+            if (dgvChiTietPhieuNhap.Rows.Count > 0)
+            {
+                int maThuoc = (int)dgvChiTietPhieuNhap.SelectedRows[0].Cells[1].Value;
+                listChiTietThuoc.Remove(listChiTietThuoc.Single(p => p.MaThuoc == maThuoc));
+                LoadChiTietNhapThuoc(listChiTietThuoc);
+            }
+        }
+
+        private void btnXoaPhieuNhap_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Xóa phiếu nhập","Thông báo",MessageBoxButtons.OKCancel,MessageBoxIcon.Question)==DialogResult.OK)
+            {
+                listChiTietThuoc.Clear();
+                LoadChiTietNhapThuoc(listChiTietThuoc);
+            }
+           
+        }
+
+        private void btnExcelPhieuNhap_Click(object sender, EventArgs e)
+        {
+            ExtensionMethod.ExportToExcel(dgvChiTietPhieuNhap, "Phiếu nhập thuốc", taiKhoan.TenHienThi, DateTime.Now.ToString("dd-MM-yyyy"), "chitietphieunhapthuoc");
+        }
+
+        /// <summary>
+        /// lưu phiêu nhập thuốc
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLuuPhieu_Click(object sender, EventArgs e)
+        {
+            PhieuNhap phieuNhap = libraryService.InsertPhieuNhap(taiKhoan.MaNV);
+            if (phieuNhap != null)
+            {
+                foreach (var item in listChiTietThuoc)
+                {
+                    ChiTietPhieuNhapThuoc chiTietPhieuNhapThuoc = new ChiTietPhieuNhapThuoc
+                    {
+                        MaPhieuNhap = phieuNhap.MaPhieuNhap,
+                        MaThuoc = item.MaThuoc,
+                        SoLuong = item.SoLuong,
+                        NgaySX = item.dtNgaySX,
+                        NgayHetHan = item.dtNgayHH,
+                        GiaNhap = decimal.Parse(item.GiaNhap),
+                        GiaBanLe = decimal.Parse(item.GiaBanLe),
+                        MaHSX = item.MaHSX,
+                        MaNhaCC = item.MaNhaCC
+                    };
+                    if (libraryService.InsertChiTietPhieuNhapThuoc(chiTietPhieuNhapThuoc) == false)
+                    {
+                        MessageBox.Show("Thêm chi tiết cho phiếu nhập thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                MessageBox.Show("Thêm phiếu nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Thêm phiếu nhập thất bại");
             }
         }
     }

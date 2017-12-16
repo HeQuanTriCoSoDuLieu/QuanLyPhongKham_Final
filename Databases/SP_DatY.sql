@@ -129,7 +129,7 @@ CREATE PROC SP_TimKiemBenhNhan_fTIepNhanBenhNhan
  DROP PROC SP_InsertBenhNhan
  GO
  
- ALTER PROC SP_InsertBenhNhan
+ CREATE PROC SP_InsertBenhNhan
 	@HOTEN nvarchar(50),
 	@GIOITINH  BIT,
 	@NGAYSINH  DATE,
@@ -206,9 +206,19 @@ CREATE PROC SP_TimKiemBenhNhan_fTIepNhanBenhNhan
 	RETURN 0
  GO
 
+ EXEC dbo.SP_InsertBenhNhan @HOTEN = N'123', -- nvarchar(50)
+     @GIOITINH = 'gioitinh', -- bit
+     @NGAYSINH = '2017-12-16 09:29:25', -- date
+     @DANTOC = N'1', -- nvarchar(50)
+     @SOCMND = N'1', -- nvarchar(20)
+     @DIACHI = N'1', -- nvarchar(250)
+     @SODT = '1', -- varchar(20)
+     @TIENSU = N'1' -- nvarchar(250)
+ DELETE dbo.BENHNHAN WHERE GIOITINH NOT IN (0,1)
+
+ SELECT * FROM dbo.BENHNHAN
+ GO
  
-
-
  -- SP_UPDATE_BENHNHAN
  DROP PROC SP_UpdateBenhNhan
  GO
@@ -534,7 +544,8 @@ GO
 CREATE PROC SP_ChiTietThuoc
 	@mathuoc INT 
 AS
-BEGIN
+SET TRAN ISOLATION LEVEL REPEATABLE READ
+BEGIN 
 SELECT  T.MATHUOC, T.TENTHUOC,CTPN.MAPHIEUNHAP,CTPN.SOLUONG,
 		convert(varchar, PN.NGAYNHAP, 103) AS 'NGAYNHAP',
 		CONVERT(varchar, CTPN.NGAYSX, 103) AS 'NGAYSX',
@@ -612,3 +623,110 @@ GO
 
 --EXEC dbo.SP_InserThuoc @TenThuoc , @LoaiThuoc , @DonViTinh , @SoLuongTon , @GhiChu 
 
+SELECT * FROM dbo.THUOC
+GO
+
+
+-- SP_InsertPhieuNhapThuoc
+DROP PROC SP_InsertPhieuNhapThuoc
+GO
+
+CREATE PROC SP_InsertPhieuNhapThuoc
+	@manv INT 
+AS
+SET TRAN ISOLATION LEVEL SERIALIZABLE
+BEGIN TRAN
+	BEGIN TRY
+		INSERT INTO dbo.PHIEUNHAP  ( MANV, NGAYNHAP ) VALUES  ( @manv,GETDATE() )     
+	END TRY
+	BEGIN CATCH
+		RAISERROR('Lỗi không insert được',16,2)
+		ROLLBACK TRAN
+	END CATCH
+	COMMIT TRAN
+	SELECT TOP(1) * FROM dbo.PHIEUNHAP ORDER BY MAPHIEUNHAP DESC
+	RETURN 0
+GO 
+ 
+
+ EXEC dbo.SP_InsertPhieuNhapThuoc @manv = 1-- int
+ GO
+ 
+
+
+
+ --SP_DanhSachNhaCungCap
+ DROP PROC SP_DanhSachNhaCungCap
+ GO
+
+ CREATE PROC SP_DanhSachNhaCungCap
+ AS
+ BEGIN 
+	SELECT * FROM dbo.NHACUNGCAP
+ END 
+ GO
+
+ EXEC dbo.SP_DanhSachNhaCungCap
+ GO
+ 
+
+ --SP_DanhSachHangSanXuat
+ DROP PROC SP_DanhSachHangSanXuat
+ GO
+ 
+ CREATE PROC SP_DanhSachHangSanXuat
+ AS
+ BEGIN
+	
+ END
+ GO
+
+
+
+
+ --SP_InsertChiTietPhieuNhap
+ DROP PROC SP_InsertChiTietPhieuNhapThuoc
+ GO
+ 
+ CREATE PROC  SP_InsertChiTietPhieuNhapThuoc
+	 @MaPhieuNhap INT,
+	 @MaThuoc INT ,
+	 @SoLuong INT, 
+	 @NgayHetHan DATE,
+	 @NgaySanXuat DATE,
+	 @GiaNhap DECIMAL,
+	 @GiaBanLe DECIMAL,
+	 @MaHSX INT, 
+	 @MaNhaCC INT 
+ AS
+ BEGIN
+	BEGIN TRAN 
+		SET TRAN ISOLATION LEVEL SERIALIZABLE
+		BEGIN TRY
+			INSERT INTO dbo.CHITIETPHIEUNHAPTHUOC  ( MAPHIEUNHAP , MATHUOC , SOLUONG , NGAYSX , NGAYHETHAN , GIANHAP , GIABANLE ,  MAHSX , MANHACC )
+			VALUES  ( @MaPhieuNhap , -- MAPHIEUNHAP - int
+			          @MaThuoc, -- MATHUOC - int
+			          @SoLuong , -- SOLUONG - int
+			          @NgaySanXuat , -- NGAYSX - date
+			          @NgayHetHan , -- NGAYHETHAN - date
+			          @GiaNhap , -- GIANHAP - money
+			          @GiaBanLe , -- GIABANLE - money
+			          @MaHSX , -- MAHSX - int
+			          @MaNhaCC  -- MANHACC - int
+			        )
+		END TRY
+		BEGIN CATCH
+			RAISERROR('Không thêm được chi tiết phiếu nhập thuốc',16,1)
+			ROLLBACK TRAN
+		END CATCH
+	COMMIT TRAN 
+ END 
+
+ GO
+ 
+
+ EXEC dbo.SP_InsertChiTietPhieuNhapThuoc @MaPhieuNhap ,      @MaThuoc ,      @SoLuong ,  @NgayHetHan ,  @NgaySanXuat , @GiaNhap , @GiaBanLe ,  @MaHSX ,   @MaNhaCC 
+ 
+ SELECT * FROM dbo.PHIEUNHAP
+ GO
+ 

@@ -27,6 +27,25 @@ namespace QuanLyPhongKham.Model.UI_DTO
             TenNhaCC = row["TENNHACC"].ToString();
         }
 
+        public ChiTietThuocGUI(int maThuoc, string tenThuoc, int maPhieu, int soLuong, string ngayNhap, string ngaySX, string ngayHH, string giaNhap, string giaBanLe, string tenHSX, string tenNhaCC)
+        {
+            MaThuoc = maThuoc;
+            TenThuoc = tenThuoc;
+            MaPhieu = maPhieu;
+            SoLuong = soLuong;
+            NgayNhap = ngayNhap;
+            NgaySX = ngaySX;
+            NgayHH = ngayHH;
+            GiaNhap = giaNhap;
+            GiaBanLe = giaBanLe;
+            TenHSX = tenHSX;
+            TenNhaCC = tenNhaCC;
+        }
+
+        public ChiTietThuocGUI()
+        {
+        }
+
         public int MaThuoc { get; set; }
         public string TenThuoc { get; set; }
         public int MaPhieu { get; set; }
@@ -38,5 +57,9 @@ namespace QuanLyPhongKham.Model.UI_DTO
         public string GiaBanLe { get; set; }
         public string TenHSX { get; set; }
         public string TenNhaCC { get; set; }
+        public DateTime dtNgaySX { get; set; }
+        public DateTime dtNgayHH { get; set; }
+        public int MaHSX { get; set; }
+        public int MaNhaCC { get; set; }
     }
 }

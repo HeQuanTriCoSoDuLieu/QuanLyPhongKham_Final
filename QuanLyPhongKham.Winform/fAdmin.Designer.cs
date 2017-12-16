@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.hệThốngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.đăngXuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,12 +48,12 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dgvPhieuNhapThuoc = new System.Windows.Forms.DataGridView();
-            this.btnLuuPhieu = new System.Windows.Forms.Button();
-            this.btnThemThuocPhieuNhap = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnXoaThuocPhieuNhap = new System.Windows.Forms.Button();
+            this.btnExcelPhieuNhap = new System.Windows.Forms.Button();
+            this.btnXoaPhieuNhap = new System.Windows.Forms.Button();
+            this.btnThemThuocPhieuNhap = new System.Windows.Forms.Button();
+            this.btnLuuPhieu = new System.Windows.Forms.Button();
+            this.dgvChiTietPhieuNhap = new System.Windows.Forms.DataGridView();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,14 +64,12 @@
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThuoc)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPhieuNhapThuoc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChiTietPhieuNhap)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -267,26 +264,76 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.btnXoaThuocPhieuNhap);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.btnExcelPhieuNhap);
+            this.tabPage2.Controls.Add(this.btnXoaPhieuNhap);
             this.tabPage2.Controls.Add(this.btnThemThuocPhieuNhap);
             this.tabPage2.Controls.Add(this.btnLuuPhieu);
-            this.tabPage2.Controls.Add(this.dgvPhieuNhapThuoc);
+            this.tabPage2.Controls.Add(this.dgvChiTietPhieuNhap);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1066, 493);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Nhập thuốc";
+            this.tabPage2.Text = "Phiếu nhập thuốc";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dgvPhieuNhapThuoc
+            // btnXoaThuocPhieuNhap
             // 
-            this.dgvPhieuNhapThuoc.AllowUserToAddRows = false;
-            this.dgvPhieuNhapThuoc.AllowUserToDeleteRows = false;
-            this.dgvPhieuNhapThuoc.BackgroundColor = System.Drawing.Color.White;
-            this.dgvPhieuNhapThuoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPhieuNhapThuoc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.btnXoaThuocPhieuNhap.Location = new System.Drawing.Point(708, 461);
+            this.btnXoaThuocPhieuNhap.Name = "btnXoaThuocPhieuNhap";
+            this.btnXoaThuocPhieuNhap.Size = new System.Drawing.Size(76, 23);
+            this.btnXoaThuocPhieuNhap.TabIndex = 6;
+            this.btnXoaThuocPhieuNhap.Text = "Xóa thuốc";
+            this.btnXoaThuocPhieuNhap.UseVisualStyleBackColor = true;
+            this.btnXoaThuocPhieuNhap.Click += new System.EventHandler(this.btnXoaThuocPhieuNhap_Click);
+            // 
+            // btnExcelPhieuNhap
+            // 
+            this.btnExcelPhieuNhap.Location = new System.Drawing.Point(595, 461);
+            this.btnExcelPhieuNhap.Name = "btnExcelPhieuNhap";
+            this.btnExcelPhieuNhap.Size = new System.Drawing.Size(107, 23);
+            this.btnExcelPhieuNhap.TabIndex = 5;
+            this.btnExcelPhieuNhap.Text = "Kết xuất Excel";
+            this.btnExcelPhieuNhap.UseVisualStyleBackColor = true;
+            this.btnExcelPhieuNhap.Click += new System.EventHandler(this.btnExcelPhieuNhap_Click);
+            // 
+            // btnXoaPhieuNhap
+            // 
+            this.btnXoaPhieuNhap.Location = new System.Drawing.Point(889, 461);
+            this.btnXoaPhieuNhap.Name = "btnXoaPhieuNhap";
+            this.btnXoaPhieuNhap.Size = new System.Drawing.Size(90, 23);
+            this.btnXoaPhieuNhap.TabIndex = 4;
+            this.btnXoaPhieuNhap.Text = "Xóa phiếu";
+            this.btnXoaPhieuNhap.UseVisualStyleBackColor = true;
+            this.btnXoaPhieuNhap.Click += new System.EventHandler(this.btnXoaPhieuNhap_Click);
+            // 
+            // btnThemThuocPhieuNhap
+            // 
+            this.btnThemThuocPhieuNhap.Location = new System.Drawing.Point(790, 461);
+            this.btnThemThuocPhieuNhap.Name = "btnThemThuocPhieuNhap";
+            this.btnThemThuocPhieuNhap.Size = new System.Drawing.Size(93, 23);
+            this.btnThemThuocPhieuNhap.TabIndex = 3;
+            this.btnThemThuocPhieuNhap.Text = "Thêm thuốc";
+            this.btnThemThuocPhieuNhap.UseVisualStyleBackColor = true;
+            this.btnThemThuocPhieuNhap.Click += new System.EventHandler(this.btnThemThuocPhieuNhap_Click);
+            // 
+            // btnLuuPhieu
+            // 
+            this.btnLuuPhieu.Location = new System.Drawing.Point(985, 461);
+            this.btnLuuPhieu.Name = "btnLuuPhieu";
+            this.btnLuuPhieu.Size = new System.Drawing.Size(75, 23);
+            this.btnLuuPhieu.TabIndex = 2;
+            this.btnLuuPhieu.Text = "Lưu phiếu";
+            this.btnLuuPhieu.UseVisualStyleBackColor = true;
+            this.btnLuuPhieu.Click += new System.EventHandler(this.btnLuuPhieu_Click);
+            // 
+            // dgvChiTietPhieuNhap
+            // 
+            this.dgvChiTietPhieuNhap.AllowUserToAddRows = false;
+            this.dgvChiTietPhieuNhap.AllowUserToDeleteRows = false;
+            this.dgvChiTietPhieuNhap.BackgroundColor = System.Drawing.Color.White;
+            this.dgvChiTietPhieuNhap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChiTietPhieuNhap.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column7,
             this.Column8,
             this.Column9,
@@ -297,58 +344,13 @@
             this.Column14,
             this.Column15,
             this.Column16});
-            this.dgvPhieuNhapThuoc.Location = new System.Drawing.Point(6, 6);
-            this.dgvPhieuNhapThuoc.Name = "dgvPhieuNhapThuoc";
-            this.dgvPhieuNhapThuoc.ReadOnly = true;
-            this.dgvPhieuNhapThuoc.RowHeadersVisible = false;
-            this.dgvPhieuNhapThuoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPhieuNhapThuoc.Size = new System.Drawing.Size(1054, 449);
-            this.dgvPhieuNhapThuoc.TabIndex = 0;
-            // 
-            // btnLuuPhieu
-            // 
-            this.btnLuuPhieu.Location = new System.Drawing.Point(985, 461);
-            this.btnLuuPhieu.Name = "btnLuuPhieu";
-            this.btnLuuPhieu.Size = new System.Drawing.Size(75, 23);
-            this.btnLuuPhieu.TabIndex = 2;
-            this.btnLuuPhieu.Text = "Lưu phiếu";
-            this.btnLuuPhieu.UseVisualStyleBackColor = true;
-            // 
-            // btnThemThuocPhieuNhap
-            // 
-            this.btnThemThuocPhieuNhap.Location = new System.Drawing.Point(790, 461);
-            this.btnThemThuocPhieuNhap.Name = "btnThemThuocPhieuNhap";
-            this.btnThemThuocPhieuNhap.Size = new System.Drawing.Size(93, 23);
-            this.btnThemThuocPhieuNhap.TabIndex = 3;
-            this.btnThemThuocPhieuNhap.Text = "Thêm thuốc";
-            this.btnThemThuocPhieuNhap.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(889, 461);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Xóa phiếu";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(595, 461);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Kết xuất Excel";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btnXoaThuocPhieuNhap
-            // 
-            this.btnXoaThuocPhieuNhap.Location = new System.Drawing.Point(708, 461);
-            this.btnXoaThuocPhieuNhap.Name = "btnXoaThuocPhieuNhap";
-            this.btnXoaThuocPhieuNhap.Size = new System.Drawing.Size(76, 23);
-            this.btnXoaThuocPhieuNhap.TabIndex = 6;
-            this.btnXoaThuocPhieuNhap.Text = "Xóa thuốc";
-            this.btnXoaThuocPhieuNhap.UseVisualStyleBackColor = true;
+            this.dgvChiTietPhieuNhap.Location = new System.Drawing.Point(6, 6);
+            this.dgvChiTietPhieuNhap.Name = "dgvChiTietPhieuNhap";
+            this.dgvChiTietPhieuNhap.ReadOnly = true;
+            this.dgvChiTietPhieuNhap.RowHeadersVisible = false;
+            this.dgvChiTietPhieuNhap.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvChiTietPhieuNhap.Size = new System.Drawing.Size(1054, 449);
+            this.dgvChiTietPhieuNhap.TabIndex = 0;
             // 
             // Column7
             // 
@@ -410,10 +412,6 @@
             this.Column16.Name = "Column16";
             this.Column16.ReadOnly = true;
             // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = typeof(QuanLyPhongKham.Model.UI_DTO.ChiTietThuocGUI);
-            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -434,8 +432,7 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThuoc)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPhieuNhapThuoc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChiTietPhieuNhap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -462,12 +459,12 @@
         private System.Windows.Forms.Button btnChiTiet;
         private System.Windows.Forms.ComboBox cbbTimKiemThuoc;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvPhieuNhapThuoc;
+        private System.Windows.Forms.DataGridView dgvChiTietPhieuNhap;
         private System.Windows.Forms.Button btnThemThuoc;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnXoaPhieuNhap;
         private System.Windows.Forms.Button btnThemThuocPhieuNhap;
         private System.Windows.Forms.Button btnLuuPhieu;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnExcelPhieuNhap;
         private System.Windows.Forms.Button btnXoaThuocPhieuNhap;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
@@ -479,6 +476,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
-        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
