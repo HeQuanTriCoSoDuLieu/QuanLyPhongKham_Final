@@ -79,7 +79,7 @@
             this.txtPassWordHienTai.MaxLength = 32767;
             this.txtPassWordHienTai.Name = "txtPassWordHienTai";
             this.txtPassWordHienTai.PasswordChar = '●';
-            this.txtPassWordHienTai.PromptText = "Mật khẩu hiện tại";
+            
             this.txtPassWordHienTai.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtPassWordHienTai.SelectedText = "";
             this.txtPassWordHienTai.SelectionLength = 0;
@@ -116,7 +116,6 @@
             this.txtnewPassword.MaxLength = 32767;
             this.txtnewPassword.Name = "txtnewPassword";
             this.txtnewPassword.PasswordChar = '●';
-            this.txtnewPassword.PromptText = "Mật khẩu mới";
             this.txtnewPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtnewPassword.SelectedText = "";
             this.txtnewPassword.SelectionLength = 0;

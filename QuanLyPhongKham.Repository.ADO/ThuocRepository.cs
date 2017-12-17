@@ -12,6 +12,8 @@ namespace QuanLyPhongKham.Repository.ADO
 {
     public class ThuocRepository : IThuocRepository
     {
+        public List<ChiTietThuocGUI> ListChiTietThuocGUI { get ; set ; }
+
         public List<ChiTietThuocGUI> ChiTietThuoc(int maThuoc)
         {
             DataTable table = DataProvider.Instane.ExecuteReader("EXEC dbo.SP_ChiTietThuoc @mathuoc", new object[] { maThuoc});

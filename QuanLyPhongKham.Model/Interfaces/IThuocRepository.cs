@@ -18,5 +18,8 @@ namespace QuanLyPhongKham.Model.Interfaces
         List<ChiTietThuocGUI> ChiTietThuoc(int maThuoc);
 
         bool InsertThuoc(Thuoc thuoc);
+
+        List<ChiTietThuocGUI> ListChiTietThuocGUI { get; set; }
+
     }
 }

@@ -56,7 +56,7 @@ namespace QuanLyPhongKham.Services
         {
         }
 
-        internal LibraryService(IBenhNhanRepository benhNhanRepository, ICanLamSanRepository canLamSanRepository, IChiTietCLSRepository chiTietCLSRepository, IChiTietDonThuocRepository chiTietDonThuocRepository, IChiTietNhapVatTuRepository chiTietNhapVatTuRepository, IChiTietNhapThuocRepository chiTietNhapThuocRepository, IChucDanhRepository chucDanhRepository, IChucVuRepository chucVuRepository, IDichVuCLSRepository dichVuCLSRepository, IDonThuocRepository donThuocRepository, IDonViTinhRepository donViTinhRepository, IHangSanXuatRepository hangSanXuatRepository, IHinhThucKhamRepository hinhThucKhamRepository,  IKhoaRepository khoaRepository, ILoaiCanLamSangRepository loaiCanLamSanRepository, ILoaiThuocRepository loaiThuocRepository, INhaCungCapRepository nhaCungCapRepository, INhanVienRepository nhanVienRepository, IPhanQuyenRepository phanQuyenRepository, IPhieuKhamRepository phieuKhamRepository, IPhieuNhapRepository phieuNhapRepository, IQuocGiaRepository quocGiaRepository, ITaiKhoanRepository taiKhoanRepository, IThuocRepository thuocRepository, IVatTuYTeRepository vatTuYTeRepository)
+        internal LibraryService(IBenhNhanRepository benhNhanRepository, ICanLamSanRepository canLamSanRepository, IChiTietCLSRepository chiTietCLSRepository, IChiTietDonThuocRepository chiTietDonThuocRepository, IChiTietNhapVatTuRepository chiTietNhapVatTuRepository, IChiTietNhapThuocRepository chiTietNhapThuocRepository, IChucDanhRepository chucDanhRepository, IChucVuRepository chucVuRepository, IDichVuCLSRepository dichVuCLSRepository, IDonThuocRepository donThuocRepository, IDonViTinhRepository donViTinhRepository, IHangSanXuatRepository hangSanXuatRepository, IHinhThucKhamRepository hinhThucKhamRepository, IKhoaRepository khoaRepository, ILoaiCanLamSangRepository loaiCanLamSanRepository, ILoaiThuocRepository loaiThuocRepository, INhaCungCapRepository nhaCungCapRepository, INhanVienRepository nhanVienRepository, IPhanQuyenRepository phanQuyenRepository, IPhieuKhamRepository phieuKhamRepository, IPhieuNhapRepository phieuNhapRepository, IQuocGiaRepository quocGiaRepository, ITaiKhoanRepository taiKhoanRepository, IThuocRepository thuocRepository, IVatTuYTeRepository vatTuYTeRepository)
         {
             this.benhNhanRepository = benhNhanRepository;
             this.canLamSanRepository = canLamSanRepository;
@@ -93,12 +93,13 @@ namespace QuanLyPhongKham.Services
         {
             return taiKhoanRepository.Login(userName, passWord);
         }
-        public int DoiMatKhau(string userName,string passWord, string newPassWord,int manv)
+        public int DoiMatKhau(string userName, string passWord, string newPassWord, int manv)
         {
             return taiKhoanRepository.DoiMatKhau(userName, passWord, newPassWord, manv);
         }
 
         #endregion Services cho tài khoản
+
 
         #region BenhNhanServices
 
@@ -123,6 +124,8 @@ namespace QuanLyPhongKham.Services
         }
 
         #endregion BenhNhanServices
+
+
 
         #region PhieuKhamServices
 
@@ -198,10 +201,11 @@ namespace QuanLyPhongKham.Services
 
         public List<PhieuKhamGUI> TimKiemLichSuTiepNhan(int maNV, string column, string value)
         {
-            return phieuKhamRepository.TimKiemLichSuTiepNhan(maNV,column,value);
+            return phieuKhamRepository.TimKiemLichSuTiepNhan(maNV, column, value);
         }
 
         #endregion PhieuKhamServices
+
 
         #region DonThuocServices
 
@@ -223,6 +227,7 @@ namespace QuanLyPhongKham.Services
         }
 
         #endregion DonThuocServices
+
 
         #region CAN LAM SANG Services
 
@@ -248,6 +253,7 @@ namespace QuanLyPhongKham.Services
 
         #endregion CAN LAM SANG Services
 
+
         #region NhanVienServices
 
         public List<LichSuKham_NhanVien> LichSuKhamNhanVien(string col, string value, int manv)
@@ -267,6 +273,7 @@ namespace QuanLyPhongKham.Services
 
         #endregion NhanVienServices
 
+
         #region form tìm kiếm thuốc
 
         public List<TimKiemThuoc> TimKiemThuoc(string timkiemthuoc, int timtheo, int loaithuoc)
@@ -274,9 +281,10 @@ namespace QuanLyPhongKham.Services
             return thuocRepository.TimKiemThuoc(timkiemthuoc, timtheo, loaithuoc);
         }
 
-    
+
 
         #endregion form tìm kiếm thuốc
+
 
         #region VatTuYTeServices
 
@@ -294,6 +302,8 @@ namespace QuanLyPhongKham.Services
 
 
         #endregion VatTuYTeServices
+
+
 
         #region ThuocServices
 
@@ -323,7 +333,7 @@ namespace QuanLyPhongKham.Services
 
         public bool ThuPhiDonThuoc(int maDonThuoc, int maNV)
         {
-            return donThuocRepository.ThuPhiDonThuoc(maDonThuoc,maNV);
+            return donThuocRepository.ThuPhiDonThuoc(maDonThuoc, maNV);
         }
 
 
@@ -338,7 +348,7 @@ namespace QuanLyPhongKham.Services
 
         public bool ThuPhiCLS(int maNV, int maDV)
         {
-            return dichVuCLSRepository.ThuPhiCLS(maNV,maDV);
+            return dichVuCLSRepository.ThuPhiCLS(maNV, maDV);
         }
 
 
@@ -366,7 +376,67 @@ namespace QuanLyPhongKham.Services
             return thuocRepository.InsertThuoc(thuoc);
         }
 
+        /// <summary>
+        /// list này dùng cho thêm chi tiết thuốc vào phiếu nhập
+        /// </summary>
+        /// 
+        private List<ChiTietThuocGUI> listChiTietThuocGUI = new List<ChiTietThuocGUI>();
+        public List<ChiTietThuocGUI> ListChiTietThuocGUI
+        {
+            get
+            {
+                return listChiTietThuocGUI;
+            }
+            set { }
+        }
+
+
+        /// <summary>
+        /// thêm phiếu nhập
+        /// </summary>
+        /// <param name="maNV"></param>
+        /// <returns></returns>
+        public PhieuNhap InsertPhieuNhap(int maNV)
+        {
+            return phieuNhapRepository.InsertPhieuNhap(maNV);
+        }
+
+        /// <summary>
+        /// insert chi tiet phieu nhap thuoc
+        /// </summary>
+        /// <param name="chiTietPhieuNhapThuoc"></param>
+        /// <returns></returns>
+        public bool InsertChiTietPhieuNhapThuoc(ChiTietPhieuNhapThuoc chiTietPhieuNhapThuoc)
+        {
+            return chiTietNhapThuocRepository.InsertChiTietPhieuNhapThuoc(chiTietPhieuNhapThuoc);
+        }
+
+
+        /// <summary>
+        /// lấy ra danh sách hãng sản xuất
+        /// </summary>
+        /// <returns></returns>
+        public List<HangSanXuat> DanhSachHangSanXuat()
+        {
+            return hangSanXuatRepository.DanhSachHangSanXuat();
+        }
+
+
+        /// <summary>
+        /// lấy ra danh sách nhà cung cấp
+        /// </summary>
+        /// <returns></returns>
+        public List<NhaCungCap> DanhSachNhaCungCap()
+        {
+            return nhaCungCapRepository.DanhSachNhaCungCap();
+        }
+
+
+
+
         #endregion
+
+
         #region DonViTinh
         public List<DonViTinh> DanhSachDonViTinh()
         {
@@ -381,7 +451,10 @@ namespace QuanLyPhongKham.Services
             return loaiThuocRepository.DanhSachLoaiThuoc();
         }
 
-        
+       
+
+
+
 
         #endregion
     }
