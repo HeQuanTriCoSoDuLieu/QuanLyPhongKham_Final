@@ -150,13 +150,13 @@ namespace QuanLyPhongKham.Winform
                 //đổ dữ liệu vào bảng đơn thuốc
 
                 List<ChiTietDonThuoc_Thuoc> listdonthuoc = new List<ChiTietDonThuoc_Thuoc>();
-                listdonthuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
+                sttListChiTietDonThuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
                 dgvdonthuoc.Rows.Clear();
-                for (int i = 0; i < listdonthuoc.Count; i++)
+                for (int i = 0; i < sttListChiTietDonThuoc.Count; i++)
                 {
-                    listdonthuoc[i].STT = i + 1;
+                    sttListChiTietDonThuoc[i].STT = i + 1;
                 }
-                foreach (var item in listdonthuoc)
+                foreach (var item in sttListChiTietDonThuoc)
                 {
                     dgvdonthuoc.Rows.Add(item.STT, item.MATHUOC, item.TENTHUOC, item.SOLUONG, item.HUONGDAN);
                 }
@@ -487,22 +487,25 @@ namespace QuanLyPhongKham.Winform
                     ctdtt.HUONGDAN = txtghichudonthuoc.Text;
                     sttListChiTietDonThuoc.Add(ctdtt);
 
-
-
-                    listdonthuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
-
-
-                    if (stt < dgvdonthuoc.Rows.Count)
+                    sttListChiTietDonThuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
+                    if (DgvDonThuoc(int.Parse(txtchonthuoc.Text)) == false)
                     {
-                        stt = dgvdonthuoc.Rows.Count;
-                        dgvdonthuoc.Rows.Add(stt, mathuocft, tenthuoc, txtsoluongthuoc.Text, txtghichudonthuoc.Text);
-                        stt = stt + 1;
+                        {
+                            if (stt < dgvdonthuoc.Rows.Count)
+                            {
+                                stt = dgvdonthuoc.Rows.Count;
+                                dgvdonthuoc.Rows.Add(stt, mathuocft, tenthuoc, txtsoluongthuoc.Text, txtghichudonthuoc.Text);
+                                stt = stt + 1;
+                            }
+                            else
+                            {
+                                dgvdonthuoc.Rows.Add(stt + 1, mathuocft, tenthuoc, txtsoluongthuoc.Text, txtghichudonthuoc.Text);
+                                stt = stt + 1;
+                            }
+                        }
                     }
-                    else
-                    {
-                        dgvdonthuoc.Rows.Add(stt + 1, mathuocft, tenthuoc, txtsoluongthuoc.Text, txtghichudonthuoc.Text);
-                        stt = stt + 1;
-                    }
+                    else MessageBox.Show("Thuốc đã có, vui lòng xóa nếu cập nhật lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
                 else
                 {
@@ -980,7 +983,28 @@ namespace QuanLyPhongKham.Winform
             return libraryService.ThemDonThuoc(donthuoc);
         }
 
+        private bool DgvDonThuoc(int a)
+        {
+            //foreach (var item in sttListChiTietDonThuoc)
+            //{
+            //    if (int.Parse(txtchonthuoc.Text) == item.MATHUOC)
+            //    {
+            //        MessageBox.Show("!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //}
+            bool t = false;
+            int b;
+            for (int i = 0; i < dgvdonthuoc.RowCount; i++)
+            {
+                b = int.Parse(dgvdonthuoc.Rows[i].Cells[1].Value.ToString());
+                if (a == b)
+                {
+                    t = true;
+                }
+            }
 
+            return t;
+        }
 
         #endregion
     }
