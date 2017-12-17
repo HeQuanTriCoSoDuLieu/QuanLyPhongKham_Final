@@ -237,7 +237,7 @@
             // btnHoanthanh
             // 
             this.btnHoanthanh.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHoanthanh.Location = new System.Drawing.Point(635, 602);
+            this.btnHoanthanh.Location = new System.Drawing.Point(768, 602);
             this.btnHoanthanh.Name = "btnHoanthanh";
             this.btnHoanthanh.Size = new System.Drawing.Size(103, 44);
             this.btnHoanthanh.TabIndex = 23;
@@ -248,7 +248,7 @@
             // btnluuphieukham
             // 
             this.btnluuphieukham.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnluuphieukham.Location = new System.Drawing.Point(800, 602);
+            this.btnluuphieukham.Location = new System.Drawing.Point(912, 602);
             this.btnluuphieukham.Name = "btnluuphieukham";
             this.btnluuphieukham.Size = new System.Drawing.Size(103, 44);
             this.btnluuphieukham.TabIndex = 20;
