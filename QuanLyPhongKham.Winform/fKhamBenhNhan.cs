@@ -29,8 +29,6 @@ namespace QuanLyPhongKham.Winform
 
         private static List<ChiTietDonThuoc_Thuoc> sttListChiTietDonThuoc;
 
-        //string link = @"F:\STUDY\ĐỒ ÁN NĂM  3\QUANLYPHONGKHAM\File";   // địa chỉ file kết quả
-
         string link = GetPath();
         
         /// <summary>
@@ -102,11 +100,7 @@ namespace QuanLyPhongKham.Winform
         }
         private void btntimphieukham_Click(object sender, EventArgs e)
         {
-            if (libraryService.KetQuaTimPhieuKham(txttimphieukham.Text.Trim(), manv).Count == 0)
-            {
-                MessageBox.Show("Không tìm thấy bệnh nhân!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
+            if (libraryService.KetQuaTimPhieuKham(txttimphieukham.Text.Trim(), manv).Count > 0)
             {
                 List<PhieuKham_BenhNhanTimKiem> list = new List<PhieuKham_BenhNhanTimKiem>();
                 list = libraryService.KetQuaTimPhieuKham(txttimphieukham.Text.Trim(), manv);
@@ -118,6 +112,11 @@ namespace QuanLyPhongKham.Winform
                 dgvdsphieukham.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy";
                 dgvdsphieukham.RowHeadersVisible = false;
                 dgvdsphieukham.Rows[0].Selected = false;
+            }
+           
+            else
+            {
+                MessageBox.Show("Không tìm thấy bệnh nhân!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void fKhamBenhNhan_Load(object sender, EventArgs e)
@@ -211,14 +210,9 @@ namespace QuanLyPhongKham.Winform
 
                 //đổ dữ liệu vào bảng đơn thuốc
 
-                List<ChiTietDonThuoc_Thuoc> listdonthuoc = new List<ChiTietDonThuoc_Thuoc>();
-                //listdonthuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
+                List<ChiTietDonThuoc_Thuoc> listdonthuoc = new List<ChiTietDonThuoc_Thuoc>();              
                 sttListChiTietDonThuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
                 dgvdonthuoc.Rows.Clear();
-                //for (int i = 0; i < listdonthuoc.Count; i++)
-                //{
-                //    sttListChiTietDonThuoc[i].STT = i + 1;
-                //}
                 int stt = 1;
                 foreach (var item in sttListChiTietDonThuoc)
                 {
@@ -258,11 +252,9 @@ namespace QuanLyPhongKham.Winform
             //Thao tác lưu phiếu 
             try
             {
-                //int cannang = int.Parse(txtcannang.Text);
-                //int chieucao = int.Parse(txtchieucao.Text);
                 DateTime ngkham = DateTime.Parse(txtngaykham.Text);
-                PhieuKham_BenhNhanLamSang pkbn = new PhieuKham_BenhNhanLamSang(int.Parse(txtmaphieukham.Text), int.Parse(txtmabenhnhan.Text), 0, txtchandoan.Text, 0, txtnhiptim.Text, txtnhietdo.Text, txthuyetap.Text, txtcannang.Text, txtchieucao.Text, txtmaicd.Text,ngkham,null, null, txtketluan.Text, txttiensukham.Text);
-                if (libraryService.LuuPhieuKham(pkbn) != 0)
+                PhieuKham_BenhNhanLamSang pkbn = new PhieuKham_BenhNhanLamSang(int.Parse(txtmaphieukham.Text), int.Parse(txtmabenhnhan.Text), 0, txtchandoan.Text, 0, txtnhiptim.Text, txtnhietdo.Text, txthuyetap.Text, txtcannang.Text, txtchieucao.Text, txtmaicd.Text,ngkham, null, null, txtketluan.Text, txttiensukham.Text);
+                if (libraryService.LuuPhieuKham(pkbn) > 0)
                 {
                     listphieukhambenhnhan = libraryService.ThongTinPhieuKham();
                     MessageBox.Show("Lưu phiếu khám thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -278,7 +270,7 @@ namespace QuanLyPhongKham.Winform
                 {   
                     foreach (ChiTietDonThuoc i in DanhSachDonThuoc())
                     {
-                        if (libraryService.TaoChiTietDonThuoc(i, dt.MAPHIEUKHAM) == 0)
+                        if (libraryService.TaoChiTietDonThuoc(i, dt.MAPHIEUKHAM) <= 0)
                         {
                                 MessageBox.Show("Lưu đơn thuốc không thành công!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 List<ChiTietDonThuoc_Thuoc> listdonthuoc = new List<ChiTietDonThuoc_Thuoc>();
@@ -356,7 +348,7 @@ namespace QuanLyPhongKham.Winform
     }
         private void btnHoanthanh_Click(object sender, EventArgs e)
         {
-            if (libraryService.HoanThanhPhieuKham(int.Parse(txtmaphieukham.Text)) != 0)
+            if (libraryService.HoanThanhPhieuKham(int.Parse(txtmaphieukham.Text)) > 0)
             {
                 listphieukhambenhnhan = libraryService.ThongTinPhieuKham();
                 MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -499,26 +491,16 @@ namespace QuanLyPhongKham.Winform
 
                     listdonthuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
 
-                    //int stt = dgvdonthuoc.RowCount;
-                    //foreach (ChiTietDonThuoc_Thuoc item in listthuoct)
-                    //{
-                    //    dgvdonthuoc.Rows.Add(++stt, item.MATHUOC, item.TENTHUOC, item.SOLUONG, item.HUONGDAN);
-                    //}
-
-
-
 
                     if (stt < dgvdonthuoc.Rows.Count)
                     {
                         stt = dgvdonthuoc.Rows.Count;
                         dgvdonthuoc.Rows.Add(stt, mathuocft, tenthuoc, txtsoluongthuoc.Text, txtghichudonthuoc.Text);
-                        //LoadDonThuoc(listthuoct);
                         stt = stt + 1;
                     }
                     else
                     {
                         dgvdonthuoc.Rows.Add(stt + 1, mathuocft, tenthuoc, txtsoluongthuoc.Text, txtghichudonthuoc.Text);
-                        //LoadDonThuoc(listthuoct);
                         stt = stt + 1;
                     }
                 }
@@ -984,7 +966,6 @@ namespace QuanLyPhongKham.Winform
             return listdt;
         }
 
-       
 
 
 
@@ -1002,7 +983,5 @@ namespace QuanLyPhongKham.Winform
 
 
         #endregion
-
-
     }
 }

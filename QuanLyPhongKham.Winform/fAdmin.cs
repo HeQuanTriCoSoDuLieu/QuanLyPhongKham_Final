@@ -205,9 +205,7 @@ namespace QuanLyPhongKham.Winform
                         MessageBox.Show("Thêm chi tiết cho phiếu nhập thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                MessageBox.Show("Thêm phiếu nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                listThuoc = libraryService.DanhSachThuoc();
-                LoadDanhSachThuoc(listThuoc);
+                MessageBox.Show("Thêm phiếu nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
