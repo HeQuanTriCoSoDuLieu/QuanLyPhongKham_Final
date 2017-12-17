@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace QuanLyPhongKham.Model.DTO
 {
     public class LoaiThuoc
     {
-        public LoaiThuoc() { }
-
-        public LoaiThuoc(int madvt, String tendvt)
+        public LoaiThuoc(int maLoaiThuoc, string tenLoaiThuoc)
         {
-            MADVT = madvt;
-            TENDVT = tendvt;
+            MaLoaiThuoc = maLoaiThuoc;
+            TenLoaiThuoc = tenLoaiThuoc;
         }
+
         public LoaiThuoc(DataRow row)
         {
-            MADVT = (int)row["MADVT"];
-            TENDVT = row["TENDVT"].ToString();
+            MaLoaiThuoc = (int)row["MALOAITHUOC"];
+            TenLoaiThuoc = row["TENLOAI"].ToString();
         }
 
-        public int MADVT { get; set; }
-        public string TENDVT { get; set; }
+        public int MaLoaiThuoc { get; set; }
+        public string TenLoaiThuoc { get; set; }
     }
 }

@@ -11,7 +11,10 @@ namespace QuanLyPhongKham.Repository.EF
 {
     public class TaiKhoanRepository : ITaiKhoanRepository
     {
-
+        public int DoiMatKhau(string userName, string passWord, string newPassWord, int manv)
+        {
+            throw new NotImplementedException();
+        }
 
         public DataTable Login(string userName, string passWord)
         {

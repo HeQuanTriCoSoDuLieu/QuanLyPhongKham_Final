@@ -21,9 +21,13 @@ namespace QuanLyPhongKham.Model.DTO
             MADICHVUCLS = (int)row["MADICHVUCLS"];
             MAPHIEUKHAM = (int)row["MAPHIEUKHAM"];
             TONGCONG = (decimal)row["TONGCONG"];
+            TinhTrang = (bool)row["TINHTRANG"]; //daty - 11/12
+            NguoiThu = (int)row["NGUOITHU"]; //daty - 11/12
         }
         public int MADICHVUCLS { get; set; }
         public int MAPHIEUKHAM { get; set; }
+        public bool TinhTrang { get; set; } // tình trạng của dịch vụ daty - 11/12
+        public int NguoiThu { get; set; } // mã nhân viên thu tiền daty - 11/12
         public decimal? TONGCONG { get; set; }
     }
 }

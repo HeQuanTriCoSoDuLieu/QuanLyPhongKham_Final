@@ -86,7 +86,6 @@
             this.chkRememberMe.Size = new System.Drawing.Size(130, 15);
             this.chkRememberMe.TabIndex = 2;
             this.chkRememberMe.Text = "Ghi nhớ đăng nhập?";
-            this.chkRememberMe.UseSelectable = true;
             // 
             // txbPassWord
             // 

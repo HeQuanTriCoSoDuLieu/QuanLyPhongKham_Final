@@ -1,199 +1,218 @@
 ﻿using QuanLyPhongKham.Infrastructure;
 using QuanLyPhongKham.Model.DTO;
+using QuanLyPhongKham.Model.UI_DTO;
 using QuanLyPhongKham.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuanLyPhongKham.Winform
 {
     public partial class fAdmin : Form
     {
+        #region Global vars
+
+        private TaiKhoan taiKhoan;
         private LibraryService libraryService;
-        public fAdmin()
+        private static List<ThuocGUI> listThuoc;
+        public static List<ChiTietThuocGUI> listChiTietThuoc;
+
+        #endregion Global vars
+
+        public fAdmin(TaiKhoan taiKhoan)
         {
             InitializeComponent();
-
+            this.taiKhoan = taiKhoan;
             libraryService = ServiceFactory.GetLibraryService(LibraryParameter.persistancestrategy);
 
+            txtTimKiemThuoc.Focus();
+            cbbTimKiemThuoc.SelectedIndex = 1;
 
-            //panelchitietkhovattuyte.Parent = panelchinh;
-           // panelchitietphieunhapthuoc.Parent = panelchinh;
-            panelkhothuoc.Parent = panelchinh;
-            panelkhovattuyte.Parent = panelchinh;
+            listChiTietThuoc = new List<ChiTietThuocGUI>();
+
+            //load danh sach thuoc
+            listThuoc = libraryService.DanhSachThuoc();
+            LoadDanhSachThuoc(listThuoc);
         }
 
-        private void treeViewQuanly_AfterSelect(object sender, TreeViewEventArgs e)
+        private void LoadDanhSachThuoc(List<ThuocGUI> listThuoc)
         {
-            switch(treeViewQuanly.SelectedNode.Name)
+            int stt = 1;
+            dgvThuoc.Rows.Clear();
+            foreach (var item in listThuoc)
             {
-                case "NodePhieunhapthuoc": ShowPhieunhapthuoc(); break;
-                case "NodePhieunhapvattu": ShowPhieunhapvattu(); break;
-                case "NodeThuoc": ShowThuoc(); break;
-                case "NodeVattuyte": ShowVattuyte(); break;
-            }
-        }
-        private void ShowPhieunhapthuoc()
-        {
-            //panelchitietkhovattuyte.Visible = false;
-           // panelchitietphieunhapthuoc.Visible = true;
-            panelkhothuoc.Visible = false;
-            panelkhovattuyte.Visible = false;
-        }
-        private void ShowPhieunhapvattu()
-        {
-            //panelchitietkhovattuyte.Visible = true;
-            //panelchitietphieunhapthuoc.Visible = false;
-            panelkhothuoc.Visible = false;
-            panelkhovattuyte.Visible = false;
-        }
-        private void ShowThuoc()
-        {
-            //panelchitietkhovattuyte.Visible = false;
-            //panelchitietphieunhapthuoc.Visible = false;
-            panelkhothuoc.Visible = true;
-            panelkhovattuyte.Visible = false;
-        }
-        private void ShowVattuyte()
-        {
-            //panelchitietkhovattuyte.Visible = false;
-            //panelchitietphieunhapthuoc.Visible = false;
-            panelkhothuoc.Visible = false;
-            panelkhovattuyte.Visible = true;
-        }
-        //private void Load_fadminThuoc()
-        //{
-        //    Tableketquatimkiemthuoc.DataSource = libraryService.Danhsachthuoc();
-        //    Tableketquatimkiemthuoc.Columns[0].HeaderText = "Mã thuốc"; Tableketquatimkiemthuoc.Columns[0].Width = 50;
-        //    Tableketquatimkiemthuoc.Columns[1].HeaderText = "Tên thuốc"; Tableketquatimkiemthuoc.Columns[1].Width = 200;
-        //    Tableketquatimkiemthuoc.Columns[2].HeaderText = "Đơn vị tính"; Tableketquatimkiemthuoc.Columns[2].Width = 60;
-        //    Tableketquatimkiemthuoc.Columns[3].HeaderText = "Loại thuốc"; Tableketquatimkiemthuoc.Columns[3].Width = 250;
-        //    Tableketquatimkiemthuoc.Columns[4].HeaderText = "Số lượng"; Tableketquatimkiemthuoc.Columns[4].Width = 50;
-        //    Tableketquatimkiemthuoc.Columns[5].HeaderText = "Ghi chú"; Tableketquatimkiemthuoc.Columns[5].Width = 385;
-        //    Tableketquatimkiemthuoc.RowHeadersVisible = false;
-        //}
-
-        private void fAdmin_Load(object sender, EventArgs e)
-        {
-            //Load_fadminThuoc();
-            Load_fadminVTYT();
-        }
-
-        private void Tableketquatimkiemthuoc_SelectionChanged(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in Tableketquatimkiemthuoc.SelectedRows)
-            {
-                
-                txtMaT.Text = row.Cells[0].Value.ToString();
-                txtTenthuoc.Text = row.Cells[1].Value.ToString();
-                txtDVT.Text = row.Cells[2].Value.ToString();
-                txtLoaithuoc.Text = row.Cells[3].Value.ToString();
-                txtSLT.Text = row.Cells[4].Value.ToString();
-                txtGhichu.Text = row.Cells[5].Value.ToString();
+                dgvThuoc.Rows.Add(stt++, item.MaThuoc, item.TenThuoc, item.SoLuongTon, item.DonViTinh, item.LoaiThuoc);
             }
         }
 
-        //private void btTimkiemkhothuoc_Click(object sender, EventArgs e)
-        //{
-        //    string col = "";
-        //    switch(comboBoxTimtheokhothuoc.SelectedIndex)
-        //    {
-        //        case 0:
-        //            col = "MATHUOC";break;
-        //        case 1:
-        //            col = "TENTHUOC";break;
-        //        case 2:
-        //            col = "TENLOAI";break;
-        //    }
-        //    if (txttimkiemkhothuoc.Text == "")
-        //    {
-        //        MessageBox.Show("Vui lòng nhập thông tin cần tìm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //    else
-        //    {
-        //        if (libraryService.Danhsachthuoc(col, txttimkiemkhothuoc.Text.Trim()).Count == 0)
-        //        {
-        //            MessageBox.Show("Không tìm thấy dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //        else
-        //        {
+        #region Events
 
-        //            Tableketquatimkiemthuoc.DataSource = libraryService.Danhsachthuoc(col, txttimkiemkhothuoc.Text.Trim());
-        //            Tableketquatimkiemthuoc.Columns[0].HeaderText = "Mã thuốc"; Tableketquatimkiemthuoc.Columns[0].Width = 50;
-        //            Tableketquatimkiemthuoc.Columns[1].HeaderText = "Tên thuốc"; Tableketquatimkiemthuoc.Columns[1].Width = 200;
-        //            Tableketquatimkiemthuoc.Columns[2].HeaderText = "Đơn vị tính"; Tableketquatimkiemthuoc.Columns[2].Width = 60;
-        //            Tableketquatimkiemthuoc.Columns[3].HeaderText = "Loại thuốc"; Tableketquatimkiemthuoc.Columns[3].Width = 250;
-        //            Tableketquatimkiemthuoc.Columns[4].HeaderText = "Số lượng"; Tableketquatimkiemthuoc.Columns[4].Width = 50;
-        //            Tableketquatimkiemthuoc.Columns[5].HeaderText = "Ghi chú"; Tableketquatimkiemthuoc.Columns[5].Width = 385;
-        //            Tableketquatimkiemthuoc.RowHeadersVisible = false;
-
-        //        }
-        //    }
-        //}
-        private void Load_fadminVTYT()
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TableKhovattuyte.DataSource = libraryService.DanhsachVTYT();
-            TableKhovattuyte.Columns[0].HeaderText = "Mã vật tư y tế"; TableKhovattuyte.Columns[0].Width = 100;
-            TableKhovattuyte.Columns[1].HeaderText = "Tên vật tư y tế"; TableKhovattuyte.Columns[1].Width = 200;
-            TableKhovattuyte.Columns[2].HeaderText = "Đơn vị tính"; TableKhovattuyte.Columns[2].Width = 150;
-            TableKhovattuyte.Columns[3].HeaderText = "Số lượng tồn"; TableKhovattuyte.Columns[3].Width = 100;
-            
-            TableKhovattuyte.RowHeadersVisible = false;
+            this.Close();
         }
 
-        private void TableKhovattuyte_SelectionChanged(object sender, EventArgs e)
+        private void btnExcel_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in TableKhovattuyte.SelectedRows)
-            {
-
-                txtMaVTYT.Text = row.Cells[0].Value.ToString();
-                txtTenVTYT.Text = row.Cells[1].Value.ToString();
-                txtTenDVT.Text = row.Cells[2].Value.ToString();
-                txtSoluongton.Text = row.Cells[3].Value.ToString();
-            }
+            ExtensionMethod.ExportToExcel(dgvThuoc, "Danh sách thuốc", taiKhoan.TenHienThi, DateTime.Now.ToString("dd/MM/yyyy HH:mm"), "danhsachthuoc");
         }
 
-        private void btTimkiemkhovattu_Click(object sender, EventArgs e)
+        private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            string col = "";
-            switch (comboBoxTimtheokhovattu.SelectedIndex)
+            int number = cbbTimKiemThuoc.SelectedIndex;
+            string column = "";
+            switch (number)
             {
                 case 0:
-                    col = "MAVTYT"; break;
+                    LoadDanhSachThuoc(listThuoc);
+                    break;
+
                 case 1:
-                    col = "TENVTYT"; break;
+                    column = "MATHUOC";
+                    break;
+
                 case 2:
-                    col = "TENDVT"; break;
+                    column = "TENTHUOC";
+                    break;
             }
-            if (txtTimkiemkhovattu.Text == "")
+            if (number != 0)
             {
-                MessageBox.Show("Vui lòng nhập thông tin cần tìm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                if (libraryService.TimkiemVTYT(col, txtTimkiemkhovattu.Text.Trim()).Count == 0)
+                if (txtTimKiemThuoc.Text.Trim() == "")
                 {
-                    MessageBox.Show("Không tìm thấy dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Vui lòng nhập thông tin cần tìm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    TableKhovattuyte.DataSource = libraryService.TimkiemVTYT(col, txtTimkiemkhovattu.Text.Trim());
-
-                    TableKhovattuyte.Columns[0].HeaderText = "Mã vật tư y tế"; TableKhovattuyte.Columns[0].Width = 100;
-                    TableKhovattuyte.Columns[1].HeaderText = "Tên vật tư y tế"; TableKhovattuyte.Columns[1].Width = 200;
-                    TableKhovattuyte.Columns[2].HeaderText = "Đơn vị tính"; TableKhovattuyte.Columns[2].Width = 150;
-                    TableKhovattuyte.Columns[3].HeaderText = "Số lượng tồn"; TableKhovattuyte.Columns[3].Width = 100;
-                    TableKhovattuyte.RowHeadersVisible= false;
-
+                    List<ThuocGUI> listThuocTemp = libraryService.TimKiemThuocAdmin(column, txtTimKiemThuoc.Text);
+                    if (listThuocTemp.Count == 0)
+                    {
+                        MessageBox.Show("Không tìm thấy dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        LoadDanhSachThuoc(listThuocTemp);
+                    }
                 }
             }
         }
-        
+
+        private void btnChiTiet_Click(object sender, EventArgs e)
+        {
+            if (dgvThuoc.SelectedRows.Count > 0)
+            {
+                int maThuoc = (int)dgvThuoc.SelectedRows[0].Cells[1].Value;
+                fChiTietThuoc f = new fChiTietThuoc(maThuoc);
+                Hide();
+                f.ShowDialog();
+                Show();
+            }
+        }
+
+        #endregion Events
+
+        #region Quản lý thuốc
+
+        private void btnThemThuoc_Click(object sender, EventArgs e)
+        {
+            fAddEditThuoc f = new fAddEditThuoc();
+            f.ShowDialog();
+            if (f.DialogResult == DialogResult.OK)
+            {
+                listThuoc = libraryService.DanhSachThuoc();
+                LoadDanhSachThuoc(listThuoc);
+            }
+        }
+
+        #endregion Quản lý thuốc
+
+        #region nhập thuốc
+
+        private void btnThemThuocPhieuNhap_Click(object sender, EventArgs e)
+        {
+            fChiTietPhieuNhapThuoc f = new fChiTietPhieuNhapThuoc();
+            f.ShowDialog();
+            if (f.DialogResult == DialogResult.OK)
+            {
+                //load lại danh sách chi tiết nhập thuốc
+                LoadChiTietNhapThuoc(listChiTietThuoc);
+            }
+        }
+
+        private void LoadChiTietNhapThuoc(List<ChiTietThuocGUI> listChiTietThuocGUI)
+        {
+            dgvChiTietPhieuNhap.Rows.Clear();
+            int stt = 1;
+            foreach (ChiTietThuocGUI item in listChiTietThuocGUI)
+            {
+                dgvChiTietPhieuNhap.Rows.Add(stt++, item.MaThuoc, item.TenThuoc, item.SoLuong, item.NgaySX, item.NgayHH, item.GiaNhap, item.GiaBanLe, item.TenHSX, item.TenNhaCC);
+            }
+        }
+
+        #endregion nhập thuốc
+
+        private void btnXoaThuocPhieuNhap_Click(object sender, EventArgs e)
+        {
+            if (dgvChiTietPhieuNhap.Rows.Count > 0)
+            {
+                int maThuoc = (int)dgvChiTietPhieuNhap.SelectedRows[0].Cells[1].Value;
+                listChiTietThuoc.Remove(listChiTietThuoc.Single(p => p.MaThuoc == maThuoc));
+                LoadChiTietNhapThuoc(listChiTietThuoc);
+            }
+        }
+
+        private void btnXoaPhieuNhap_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Xóa phiếu nhập","Thông báo",MessageBoxButtons.OKCancel,MessageBoxIcon.Question)==DialogResult.OK)
+            {
+                listChiTietThuoc.Clear();
+                LoadChiTietNhapThuoc(listChiTietThuoc);
+            }
+           
+        }
+
+        private void btnExcelPhieuNhap_Click(object sender, EventArgs e)
+        {
+            ExtensionMethod.ExportToExcel(dgvChiTietPhieuNhap, "Phiếu nhập thuốc", taiKhoan.TenHienThi, DateTime.Now.ToString("dd-MM-yyyy"), "chitietphieunhapthuoc");
+        }
+
+        /// <summary>
+        /// lưu phiêu nhập thuốc
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLuuPhieu_Click(object sender, EventArgs e)
+        {
+            PhieuNhap phieuNhap = libraryService.InsertPhieuNhap(taiKhoan.MaNV);
+            if (phieuNhap != null)
+            {
+                foreach (var item in listChiTietThuoc)
+                {
+                    ChiTietPhieuNhapThuoc chiTietPhieuNhapThuoc = new ChiTietPhieuNhapThuoc
+                    {
+                        MaPhieuNhap = phieuNhap.MaPhieuNhap,
+                        MaThuoc = item.MaThuoc,
+                        SoLuong = item.SoLuong,
+                        NgaySX = item.dtNgaySX,
+                        NgayHetHan = item.dtNgayHH,
+                        GiaNhap = decimal.Parse(item.GiaNhap),
+                        GiaBanLe = decimal.Parse(item.GiaBanLe),
+                        MaHSX = item.MaHSX,
+                        MaNhaCC = item.MaNhaCC
+                    };
+                    if (libraryService.InsertChiTietPhieuNhapThuoc(chiTietPhieuNhapThuoc) == false)
+                    {
+                        MessageBox.Show("Thêm chi tiết cho phiếu nhập thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                MessageBox.Show("Thêm phiếu nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                listThuoc = libraryService.DanhSachThuoc();
+                LoadDanhSachThuoc(listThuoc);
+            }
+            else
+            {
+                MessageBox.Show("Thêm phiếu nhập thất bại");
+            }
+        }
     }
 }

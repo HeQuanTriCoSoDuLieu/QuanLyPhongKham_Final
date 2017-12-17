@@ -22,8 +22,9 @@ namespace QuanLyPhongKham.Winform
         #region bien toan cuc
         private LibraryService libraryService;
         private static List<PhieuKham_BenhNhanLamSang> listphieukhambenhnhan;
-
         int manv, sttMaPhieu;
+        string userName;
+        string passWord;
 
 
         private static List<ChiTietDonThuoc_Thuoc> sttListChiTietDonThuoc;
@@ -45,9 +46,11 @@ namespace QuanLyPhongKham.Winform
         #endregion
 
         #region Constructor 
-        public fKhamBenhNhan(int manv)
+        public fKhamBenhNhan(int manv, string userName, string passWord)
         {
             this.manv = manv;
+            this.userName = userName;
+            this.passWord = passWord;
             InitializeComponent();
             libraryService = ServiceFactory.GetLibraryService(LibraryParameter.persistancestrategy);
             //khởi tạo list
@@ -132,7 +135,7 @@ namespace QuanLyPhongKham.Winform
                 PhieuKham_BenhNhanLamSang pk = listphieukhambenhnhan.Where(b => b.MaPhieuKham == maphieu).Single();
                 txtmaphieukham.Text = pk.MaPhieuKham.ToString();
                 txtmabenhnhan.Text = pk.MaBN.ToString();
-                txtngaykham.Text = pk.NgayKham.ToString("dd/MM/yyyy");
+                txtngaykham.Text = pk.NgayKham.ToString();
                 txtchandoan.Text = pk.ChuanDoan;
                 txtketluan.Text = pk.KetLuan;
                 txtnhietdo.Text = pk.NhietDo.ToString();
@@ -190,10 +193,11 @@ namespace QuanLyPhongKham.Winform
                 sttMaPhieu = (int)row.Cells[0].Value;
                 int maphieu = (int)row.Cells[0].Value;
                 txttenbenhnhan.Text = row.Cells[1].Value.ToString();
+
                 PhieuKham_BenhNhanLamSang pk = listphieukhambenhnhan.Where(p => p.MaPhieuKham == maphieu).Single();
                 txtmaphieukham.Text = pk.MaPhieuKham.ToString();
                 txtmabenhnhan.Text = pk.MaBN.ToString();
-                txtngaykham.Text = pk.NgayKham.ToString("dd/MM/yyyy");
+                txtngaykham.Text = pk.NgayKham.ToString();
                 txtchandoan.Text = pk.ChuanDoan;
                 txtketluan.Text = pk.KetLuan;
                 txtnhietdo.Text = pk.NhietDo.ToString();
@@ -254,11 +258,13 @@ namespace QuanLyPhongKham.Winform
             //Thao tác lưu phiếu 
             try
             {
-                int cannang = int.Parse(txtcannang.Text);
-                int chieucao = int.Parse(txtchieucao.Text);
-                PhieuKham_BenhNhanLamSang pkbn = new PhieuKham_BenhNhanLamSang(int.Parse(txtmaphieukham.Text), int.Parse(txtmabenhnhan.Text), 0, txtchandoan.Text, 0, txtnhiptim.Text, txtnhietdo.Text, txthuyetap.Text, txtcannang.Text, txtchieucao.Text, txtmaicd.Text, DateTime.Parse(txtngaykham.Text), null, null, txtketluan.Text, txttiensukham.Text);
+                //int cannang = int.Parse(txtcannang.Text);
+                //int chieucao = int.Parse(txtchieucao.Text);
+                DateTime ngkham = DateTime.Parse(txtngaykham.Text);
+                PhieuKham_BenhNhanLamSang pkbn = new PhieuKham_BenhNhanLamSang(int.Parse(txtmaphieukham.Text), int.Parse(txtmabenhnhan.Text), 0, txtchandoan.Text, 0, txtnhiptim.Text, txtnhietdo.Text, txthuyetap.Text, txtcannang.Text, txtchieucao.Text, txtmaicd.Text,ngkham,null, null, txtketluan.Text, txttiensukham.Text);
                 if (libraryService.LuuPhieuKham(pkbn) != 0)
                 {
+                    listphieukhambenhnhan = libraryService.ThongTinPhieuKham();
                     MessageBox.Show("Lưu phiếu khám thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -320,7 +326,7 @@ namespace QuanLyPhongKham.Winform
                 PhieuKham_BenhNhanLamSang pk = listphieukhambenhnhan.Where(p => p.MaPhieuKham == maphieu).Single();
                 txtmaphieukham.Text = pk.MaPhieuKham.ToString();
                 txtmabenhnhan.Text = pk.MaBN.ToString();
-                txtngaykham.Text = pk.NgayKham.ToString("dd/MM/yyyy");
+                txtngaykham.Text = pk.NgayKham.ToString();
                 txtchandoan.Text = pk.ChuanDoan;
                 txtketluan.Text = pk.KetLuan;
                 txtnhietdo.Text = pk.NhietDo.ToString();
@@ -352,6 +358,7 @@ namespace QuanLyPhongKham.Winform
         {
             if (libraryService.HoanThanhPhieuKham(int.Parse(txtmaphieukham.Text)) != 0)
             {
+                listphieukhambenhnhan = libraryService.ThongTinPhieuKham();
                 MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadForm();
             }
@@ -373,7 +380,7 @@ namespace QuanLyPhongKham.Winform
                 pk = listphieukhambenhnhan.Where(p => p.MaPhieuKham == f.maphieu).Single();
                 txtmaphieukham.Text = pk.MaPhieuKham.ToString();
                 txtmabenhnhan.Text = pk.MaBN.ToString();
-                txtngaykham.Text = pk.NgayKham.ToString("dd/MM/yyyy");
+                txtngaykham.Text = pk.NgayKham.ToString();
                 txtchandoan.Text = pk.ChuanDoan;
                 txtketluan.Text = pk.KetLuan;
                 txtnhietdo.Text = pk.NhietDo.ToString();
@@ -745,6 +752,17 @@ namespace QuanLyPhongKham.Winform
             }
         }
 
+        private void tsmi_doimatkhau_Click(object sender, EventArgs e)
+        {
+            fDoiMatKhauNhanVien f = new fDoiMatKhauNhanVien(userName,manv);
+            f.ShowDialog();             
+        }
+
+        private void tsmi_dangxuat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         #endregion
 
         #region Method
@@ -756,7 +774,7 @@ namespace QuanLyPhongKham.Winform
 
             splited = splited.Take(splited.Count() - 3).ToArray();
 
-            return string.Join("\\", splited) + "\\File\\";
+            return string.Join("\\", splited) + "\\";
         }
 
         /// <summary>
@@ -965,6 +983,10 @@ namespace QuanLyPhongKham.Winform
             }
             return listdt;
         }
+
+       
+
+
 
 
         /// <summary>

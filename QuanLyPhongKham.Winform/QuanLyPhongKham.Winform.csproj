@@ -32,8 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>hospital.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>QuanLyPhongKham.Winform.Program</StartupObject>
@@ -41,12 +40,15 @@
   <ItemGroup>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -89,11 +91,29 @@
     <Compile Include="fAddEditPhieuKham.Designer.cs">
       <DependentUpon>fAddEditPhieuKham.cs</DependentUpon>
     </Compile>
+    <Compile Include="fAddEditThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fAddEditThuoc.Designer.cs">
+      <DependentUpon>fAddEditThuoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="fAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="fAdmin.Designer.cs">
       <DependentUpon>fAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fChiTietPhieuNhapThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fChiTietPhieuNhapThuoc.Designer.cs">
+      <DependentUpon>fChiTietPhieuNhapThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fChiTietThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fChiTietThuoc.Designer.cs">
+      <DependentUpon>fChiTietThuoc.cs</DependentUpon>
     </Compile>
     <Compile Include="fKhamBenhNhan.cs">
       <SubType>Form</SubType>
@@ -118,6 +138,12 @@
     </Compile>
     <Compile Include="fLogin.Designer.cs">
       <DependentUpon>fLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fDoiMatKhauNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fDoiMatKhauNhanVien.Designer.cs">
+      <DependentUpon>fDoiMatKhauNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="fTiepNhanBenhNhan.cs">
       <SubType>Form</SubType>
@@ -145,6 +171,18 @@
     <EmbeddedResource Include="fAddEditPhieuKham.resx">
       <DependentUpon>fAddEditPhieuKham.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="fAddEditThuoc.resx">
+      <DependentUpon>fAddEditThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fAdmin.resx">
+      <DependentUpon>fAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fChiTietPhieuNhapThuoc.resx">
+      <DependentUpon>fChiTietPhieuNhapThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fChiTietThuoc.resx">
+      <DependentUpon>fChiTietThuoc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fKhamBenhNhan.resx">
       <DependentUpon>fKhamBenhNhan.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -157,6 +195,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fLogin.resx">
       <DependentUpon>fLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fThuNgan.resx">
+      <DependentUpon>fThuNgan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fDoiMatKhauNhanVien.resx">
+      <DependentUpon>fDoiMatKhauNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fTiepNhanBenhNhan.resx">
       <DependentUpon>fTiepNhanBenhNhan.cs</DependentUpon>
@@ -176,6 +220,7 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\QuanLyPhongKham.Model.DTO.BenhNhan.datasource" />
+    <None Include="Properties\DataSources\QuanLyPhongKham.Model.UI_DTO.ChiTietThuocGUI.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -198,6 +243,7 @@
     <Content Include="Assets\Images\user-icon.png" />
     <Content Include="Assets\Images\User-Interface-Password-icon.png" />
     <Content Include="Assets\Images\user_male2-64.png" />
+    <Content Include="hospital.ico" />
     <None Include="Resources\TEST.jpg" />
   </ItemGroup>
   <ItemGroup>

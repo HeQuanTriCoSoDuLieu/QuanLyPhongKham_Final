@@ -46,14 +46,14 @@ namespace QuanLyPhongKham.Winform
             switch (result)
             {
                 case 1:
-                    fAdmin admin = new fAdmin();
+                    fAdmin admin = new fAdmin(taiKhoan);
                     Hide();
                     admin.ShowDialog();
                     Show();
                     break;
 
                 case 2:
-                    fKhamBenhNhan khamBenhNhan = new fKhamBenhNhan(id);
+                    fKhamBenhNhan khamBenhNhan = new fKhamBenhNhan(id,userName, passWord);
                     Hide();
                     khamBenhNhan.ShowDialog();
                     Show();
@@ -67,7 +67,7 @@ namespace QuanLyPhongKham.Winform
                     break;
 
                 case 4:
-                    fThuNgan thuNgan = new fThuNgan();
+                    fThuNgan thuNgan = new fThuNgan(taiKhoan);
                     Hide();
                     thuNgan.ShowDialog();
                     Show();

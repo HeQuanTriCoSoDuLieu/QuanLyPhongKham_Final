@@ -43,9 +43,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_lichsulamviec = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_doimatkhau = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_dangxuat = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHoanthanh = new System.Windows.Forms.Button();
-            this.btnxuatdonthuoc = new System.Windows.Forms.Button();
             this.btnluuphieukham = new System.Windows.Forms.Button();
             this.panelchinh = new System.Windows.Forms.Panel();
             this.panelxquang = new System.Windows.Forms.Panel();
@@ -191,7 +192,9 @@
             this.menuToolStripMenuItem.Checked = true;
             this.menuToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmi_lichsulamviec});
+            this.tsmi_lichsulamviec,
+            this.tsmi_doimatkhau,
+            this.tsmi_dangxuat});
             this.menuToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
@@ -204,11 +207,24 @@
             this.tsmi_lichsulamviec.Text = "Lịch sử làm việc";
             this.tsmi_lichsulamviec.Click += new System.EventHandler(this.tsmi_lichsulamviec_Click);
             // 
+            // tsmi_doimatkhau
+            // 
+            this.tsmi_doimatkhau.Name = "tsmi_doimatkhau";
+            this.tsmi_doimatkhau.Size = new System.Drawing.Size(170, 22);
+            this.tsmi_doimatkhau.Text = "Đổi mật khẩu";
+            this.tsmi_doimatkhau.Click += new System.EventHandler(this.tsmi_doimatkhau_Click);
+            // 
+            // tsmi_dangxuat
+            // 
+            this.tsmi_dangxuat.Name = "tsmi_dangxuat";
+            this.tsmi_dangxuat.Size = new System.Drawing.Size(170, 22);
+            this.tsmi_dangxuat.Text = "Đăng xuất";
+            this.tsmi_dangxuat.Click += new System.EventHandler(this.tsmi_dangxuat_Click);
+            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.btnHoanthanh);
-            this.panel1.Controls.Add(this.btnxuatdonthuoc);
             this.panel1.Controls.Add(this.btnluuphieukham);
             this.panel1.Controls.Add(this.panelchinh);
             this.panel1.Controls.Add(this.panel3);
@@ -229,20 +245,10 @@
             this.btnHoanthanh.UseVisualStyleBackColor = true;
             this.btnHoanthanh.Click += new System.EventHandler(this.btnHoanthanh_Click);
             // 
-            // btnxuatdonthuoc
-            // 
-            this.btnxuatdonthuoc.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnxuatdonthuoc.Location = new System.Drawing.Point(895, 602);
-            this.btnxuatdonthuoc.Name = "btnxuatdonthuoc";
-            this.btnxuatdonthuoc.Size = new System.Drawing.Size(103, 44);
-            this.btnxuatdonthuoc.TabIndex = 21;
-            this.btnxuatdonthuoc.Text = "XUẤT ĐƠN THUỐC";
-            this.btnxuatdonthuoc.UseVisualStyleBackColor = true;
-            // 
             // btnluuphieukham
             // 
             this.btnluuphieukham.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnluuphieukham.Location = new System.Drawing.Point(765, 602);
+            this.btnluuphieukham.Location = new System.Drawing.Point(800, 602);
             this.btnluuphieukham.Name = "btnluuphieukham";
             this.btnluuphieukham.Size = new System.Drawing.Size(103, 44);
             this.btnluuphieukham.TabIndex = 20;
@@ -1424,7 +1430,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnluuphieukham;
-        private System.Windows.Forms.TextBox txtngaykham;
         private System.Windows.Forms.TextBox txtmaphieukham;
         private System.Windows.Forms.TextBox txttenbenhnhan;
         private System.Windows.Forms.TextBox txtketluan;
@@ -1503,7 +1508,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txtmabenhnhan;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnxuatdonthuoc;
         private System.Windows.Forms.Panel panellichsukham;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView dgvlichsukham;
@@ -1519,5 +1523,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_doimatkhau;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_dangxuat;
+        private System.Windows.Forms.TextBox txtngaykham;
     }
 }
