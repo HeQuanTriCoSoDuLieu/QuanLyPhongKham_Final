@@ -199,6 +199,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fThuNgan.resx">
       <DependentUpon>fThuNgan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fDoiMatKhauNhanVien.resx">
       <DependentUpon>fDoiMatKhauNhanVien.cs</DependentUpon>
     </EmbeddedResource>
