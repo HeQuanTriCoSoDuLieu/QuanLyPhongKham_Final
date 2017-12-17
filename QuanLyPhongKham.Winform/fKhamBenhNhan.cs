@@ -261,7 +261,7 @@ namespace QuanLyPhongKham.Winform
                 //int cannang = int.Parse(txtcannang.Text);
                 //int chieucao = int.Parse(txtchieucao.Text);
                 DateTime ngkham = DateTime.Parse(txtngaykham.Text);
-                PhieuKham_BenhNhanLamSang pkbn = new PhieuKham_BenhNhanLamSang(int.Parse(txtmaphieukham.Text), int.Parse(txtmabenhnhan.Text), 0, txtchandoan.Text, 0, txtnhiptim.Text, txtnhietdo.Text, txthuyetap.Text, txtcannang.Text, txtchieucao.Text, txtmaicd.Text,ngkham, null, null, txtketluan.Text, txttiensukham.Text);
+                PhieuKham_BenhNhanLamSang pkbn = new PhieuKham_BenhNhanLamSang(int.Parse(txtmaphieukham.Text), int.Parse(txtmabenhnhan.Text), 0, txtchandoan.Text, 0, txtnhiptim.Text, txtnhietdo.Text, txthuyetap.Text, txtcannang.Text, txtchieucao.Text, txtmaicd.Text,ngkham,null, null, txtketluan.Text, txttiensukham.Text);
                 if (libraryService.LuuPhieuKham(pkbn) != 0)
                 {
                     listphieukhambenhnhan = libraryService.ThongTinPhieuKham();
@@ -984,6 +984,7 @@ namespace QuanLyPhongKham.Winform
             return listdt;
         }
 
+       
 
 
 

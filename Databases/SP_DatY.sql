@@ -3,20 +3,6 @@ GO
 
 -------------------STORE-PROCEDURE----------------------------------------
 
---1. Bảng PHANQUYEN
---1.1 SP_INSERT_PHANQUYEN
-CREATE PROC SP_INSERT_PHANQUYEN
-@QUYEN INT,
-@GHICHU NVARCHAR(250)
-AS
-BEGIN
-	INSERT dbo.PHANQUYEN
-	        ( QUYEN, GHICHU )
-	VALUES  ( @QUYEN, -- QUYEN - int
-	          @GHICHU  -- GHICHU - nvarchar(250)
-	          )
-END
-GO
 
 
 
@@ -49,7 +35,7 @@ END
 GO
 
 
---2.2 SP_LOGIN
+-- SP_LOGIN
 
 Drop PROC SP_LOGIN
 GO
@@ -235,14 +221,26 @@ CREATE PROC SP_UpdateBenhNhan
 	@TIENSU NVARCHAR(250)
 AS
 BEGIN
+	
+	-- KIỂM TRA MABN CO TON TAI TRONG DB KHONG
+	IF NOT EXISTS(SELECT * FROM dbo.BENHNHAN WHERE MABN = @MABN)
+	BEGIN
+		RAISERROR('MÃ BỆNH NHÂN KHÔNG TỒN TẠI',16,1)
+		RETURN 1
+	END
+	
+	--
+
 	UPDATE  dbo.BENHNHAN  SET   HOTEN = @HOTEN , GIOITINH = @GIOITINH, NGAYSINH = @NGAYSINH,  DANTOC = @DANTOC,
 								SOCMND = @SOCMND, DIACHI = @DIACHI , SODT = @SODT , TIENSU = @TIENSU
-	    
-				WHERE MABN = @MABN
-				
+	WHERE MABN = @MABN
+	RETURN 0		
 END
 GO
 
+
+SELECT * FROM dbo.BENHNHAN
+GO
 
  
 
@@ -602,12 +600,67 @@ GO
 EXEC dbo.SP_DanhSachLoaiThuoc 
 GO
 
---SP_InserThuoc
-DROP PROC SP_InserThuoc
+
+
+
+--TG_INSUP_THUOC
+DROP TRIGGER TG_INSUP_THUOC 
+GO
+CREATE TRIGGER TG_INSUP_THUOC ON dbo.THUOC
+FOR INSERT, UPDATE
+AS
+BEGIN 
+	
+	--KIEM TRA SO LUONG
+	DECLARE @SOLUONGTON INT = (SELECT Inserted.SOLUONGTON FROM Inserted)
+	IF @SOLUONGTON < 0
+	BEGIN
+		RAISERROR('SỐ LƯỢNG PHẢI LÀ SỐ DƯƠNG',16,1)
+		ROLLBACK TRAN
+	END
+	
+	IF ISNUMERIC(@SOLUONGTON) = 0
+	BEGIN
+		RAISERROR('SỐ LƯỢNG PHẢI LÀ SỐ',16,1)
+		ROLLBACK TRAN
+	END
+	
+
+	-- KIỂM TRA TÊN KHÔNG ĐƯỢC RỖNG
+	IF (SELECT Inserted.TENTHUOC FROM Inserted) = ''
+	BEGIN
+		RAISERROR('TÊN THUỐC KHÔNG ĐƯỢC RỖNG',16,1)
+		ROLLBACK TRAN
+	END
+
+END 
+
 GO
 
-CREATE PROC SP_InserThuoc
-	
+
+INSERT INTO dbo.THUOC
+        ( TENTHUOC ,
+          DONVITINH ,
+          LOAITHUOC ,
+          SOLUONGTON ,
+          GHICHU
+        )
+VALUES  ( N'1' , -- TENTHUOC - nvarchar(50)
+          1 , -- DONVITINH - int
+          1 , -- LOAITHUOC - int
+          'ASDSA' , -- SOLUONGTON - int
+          ''  -- GHICHU - text
+        )
+GO
+
+SELECT * FROM dbo.THUOC
+GO
+
+-- PROC SP_InsertThuoc
+
+DROP PROC SP_InsertThuocAdmin
+GO
+CREATE PROC SP_InsertThuocAdmin
 	@TenThuoc NVARCHAR(250),
 	@LoaiThuoc INT ,
 	@DonViTinh INT ,
@@ -616,14 +669,49 @@ CREATE PROC SP_InserThuoc
 AS
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
 BEGIN TRAN
-	INSERT INTO dbo.THUOC( TENTHUOC , DONVITINH , LOAITHUOC ,SOLUONGTON ,GHICHU)
-	VALUES  ( @TenThuoc,	@DonViTinh ,@LoaiThuoc ,@SoLuongTon ,@GhiChu  )
+	
+	--KIỂM TRA TÊN THUỐC KHÔNG ĐƯỢC RỖNG
+	IF @TenThuoc = ''
+	BEGIN
+		RAISERROR('TÊN THUỐC KHÔNG ĐƯỢC RỖNG',16,1)
+		ROLLBACK TRAN
+		RETURN 1
+	END
+
+	-- KIỂM TRA SỐ LƯỢNG
+	IF @SoLuongTon < 0
+	BEGIN
+		RAISERROR('SỐ LƯỢNG PHẢI DƯƠNG',16,1)
+		ROLLBACK TRAN
+		RETURN 1
+	END
+
+	IF ISNUMERIC(@SoLuongTon) = 0
+	BEGIN
+		RAISERROR('SỐ LƯỢNG PHẢI LÀ SỐ',16,1)
+		ROLLBACK TRAN
+		RETURN 1
+	END
+	-- INSERT VÀO DB
+	BEGIN TRY
+		INSERT INTO dbo.THUOC( TENTHUOC , DONVITINH , LOAITHUOC ,SOLUONGTON ,GHICHU)
+		VALUES  ( @TenThuoc,	@DonViTinh ,@LoaiThuoc ,@SoLuongTon ,@GhiChu  )
+	END TRY
+	BEGIN CATCH
+		RAISERROR('LỖI KHÔNG INSERT ĐƯỢC THUỐC',16,1)
+		ROLLBACK TRAN
+		RETURN 1
+	END CATCH
 	COMMIT TRAN 
+	RETURN 0
 GO
+
+
+
 
 --EXEC dbo.SP_InserThuoc @TenThuoc , @LoaiThuoc , @DonViTinh , @SoLuongTon , @GhiChu 
 
-SELECT * FROM dbo.THUOC
+
 GO
 
 
@@ -655,6 +743,7 @@ GO
 
 
 
+
  --SP_DanhSachNhaCungCap
  DROP PROC SP_DanhSachNhaCungCap
  GO
@@ -677,10 +766,62 @@ GO
  CREATE PROC SP_DanhSachHangSanXuat
  AS
  BEGIN
-	
+	SELECT * FROM dbo.HANGSANXUAT
  END
  GO
 
+ EXEC dbo.SP_DanhSachHangSanXuat
+ GO
+
+
+
+
+
+ --TRIGGER CHO INSERTCHITIETPHIEUNHAPTHUOC
+ DROP TRIGGER TG_INSERT_UPDATE_CHITIETPHIEUNHAPTHUOC
+ GO
+
+ CREATE TRIGGER TG_INSERT_UPDATE_CHITIETPHIEUNHAPTHUOC
+ ON dbo.CHITIETPHIEUNHAPTHUOC
+ FOR INSERT, UPDATE 
+ AS
+	
+	--LẤY RA GIÁ NHẬP ĐÃ INSERT
+	DECLARE @GIANHAP INT = (SELECT Inserted.GIANHAP FROM Inserted)
+	IF @GIANHAP < 0
+	BEGIN
+		RAISERROR('GIÁ NHẬP PHẢI LỚN 0',16,1)
+		ROLLBACK TRAN
+	END
+
+	--LẤY RA GIÁ BÁN LẺ ĐÃ INSERT
+	DECLARE @GIABANLEN INT = (SELECT Inserted.GIABANLE FROM Inserted)
+	IF @GIABANLEN < 0
+	BEGIN
+		RAISERROR('GIÁ NHẬP PHẢI LỚN 0',16,1)
+		ROLLBACK TRAN
+	END
+
+
+	-- LẤY RA SỐ LƯỢNG ĐÃ INSERT
+	DECLARE @SOLUONG   INT = 0 
+	SET @SOLUONG = (SELECT SOLUONG FROM Inserted )
+	IF @SOLUONG < 0
+	BEGIN
+		RAISERROR('SỐ LƯỢNG NHẬP PHẢI LỚN 0',16,1)
+		ROLLBACK TRAN
+	END
+
+
+
+	--LẤY RA MÃ THUỐC ĐÃ INSERT
+	DECLARE @MATHUOC INT = (SELECT Inserted.MATHUOC FROM Inserted)
+
+
+	--CẬP NHẬT LẠI SỐ LƯỢNG THUỐC ĐÃ INSERT
+	DECLARE @SOLUONGTON INT = (SELECT SOLUONGTON FROM dbo.THUOC WHERE MATHUOC = @MATHUOC)
+	UPDATE dbo.THUOC SET SOLUONGTON = (@SOLUONGTON+@SOLUONG) WHERE MATHUOC = @MATHUOC
+GO
 
 
 
@@ -702,6 +843,26 @@ GO
  BEGIN
 	BEGIN TRAN 
 		SET TRAN ISOLATION LEVEL SERIALIZABLE
+
+
+
+		-- KIEM TRA SO LUONG 
+		IF	@SoLuong < 0 
+		BEGIN
+			RAISERROR('SỐ LƯỢNG NHẬP PHẢI LỚN HƠN 0',16,1)
+			RETURN 1
+		END
+
+		-- KIEM TRA GIA TIEN 
+		IF @GiaNhap < 0 OR @GiaBanLe < 0
+		BEGIN
+			RAISERROR('GIÁ TIỀN PHẢI LỚN HƠN 0',16,1)
+			RETURN 1
+		END
+
+
+		-- INSERT VAO DB
+
 		BEGIN TRY
 			INSERT INTO dbo.CHITIETPHIEUNHAPTHUOC  ( MAPHIEUNHAP , MATHUOC , SOLUONG , NGAYSX , NGAYHETHAN , GIANHAP , GIABANLE ,  MAHSX , MANHACC )
 			VALUES  ( @MaPhieuNhap , -- MAPHIEUNHAP - int
@@ -714,19 +875,136 @@ GO
 			          @MaHSX , -- MAHSX - int
 			          @MaNhaCC  -- MANHACC - int
 			        )
+			-- cập nhật lại số lượng của thuốc được thêm vào mã phiếu nhập
+			DECLARE @SoLuongTon INT = 0
+			SET @SoLuongTon = (SELECT SOLUONGTON FROM dbo.THUOC WHERE MATHUOC = @MaThuoc)
+			UPDATE dbo.THUOC SET SOLUONGTON = (@SoLuongTon+@SoLuong) WHERE MATHUOC = @MaThuoc
 		END TRY
 		BEGIN CATCH
 			RAISERROR('Không thêm được chi tiết phiếu nhập thuốc',16,1)
 			ROLLBACK TRAN
 		END CATCH
 	COMMIT TRAN 
+	RETURN 0
  END 
 
  GO
  
 
- EXEC dbo.SP_InsertChiTietPhieuNhapThuoc @MaPhieuNhap ,      @MaThuoc ,      @SoLuong ,  @NgayHetHan ,  @NgaySanXuat , @GiaNhap , @GiaBanLe ,  @MaHSX ,   @MaNhaCC 
- 
- SELECT * FROM dbo.PHIEUNHAP
+
+ --SP_UPDATE_ChiTietPhieuNhap
+ DROP PROC SP_UPDATE_ChiTietPhieuNhap
  GO
  
+ CREATE PROC  SP_UPDATE_ChiTietPhieuNhap
+	 @MaPhieuNhap INT,
+	 @MaThuoc INT ,
+	 @SoLuong INT, 
+	 @NgayHetHan DATE,
+	 @NgaySanXuat DATE,
+	 @GiaNhap DECIMAL,
+	 @GiaBanLe DECIMAL,
+	 @MaHSX INT, 
+	 @MaNhaCC INT 
+ AS
+ BEGIN
+	BEGIN TRAN 
+		SET TRAN ISOLATION LEVEL SERIALIZABLE
+		
+		-- KIEM TRA MA PHIEU NHAP 
+		IF NOT EXISTS (SELECT * FROM dbo.CHITIETPHIEUNHAPTHUOC WHERE MAPHIEUNHAP = @MaPhieuNhap)
+		BEGIN
+			RAISERROR('MÃ PHIẾU NHẬP KHÔNG TỒN TẠI',16,1)
+			RETURN 1
+		END
+
+		-- KIEM TRA MA THUOC 
+		IF NOT EXISTS (SELECT * FROM dbo.CHITIETPHIEUNHAPTHUOC WHERE MAPHIEUNHAP = @MaPhieuNhap AND MATHUOC = @MaThuoc)
+		BEGIN
+			RAISERROR('MÃ THUỐC KHÔNG PHÙ HƠP VỚI MÃ PHIẾU NHẬP',16,1)
+			RETURN 1
+		END
+
+		-- KIEM TRA SO LUONG 
+		IF	@SoLuong < 0 
+		BEGIN
+			RAISERROR('SỐ LƯỢNG NHẬP PHẢI LỚN HƠN 0',16,1)
+			RETURN 1
+		END
+
+		-- KIEM TRA GIA TIEN 
+		IF @GiaNhap < 0 OR @GiaBanLe < 0
+		BEGIN
+			RAISERROR('GIÁ TIỀN PHẢI LỚN HƠN 0',16,1)
+			RETURN 1
+		END
+
+
+		-- UPDATE LẠI CHI TIẾT PHIẾU NHẬP
+
+		BEGIN TRY
+			UPDATE dbo.CHITIETPHIEUNHAPTHUOC SET SOLUONG = @SoLuong , NGAYSX = @NgaySanXuat , NGAYHETHAN = @NgayHetHan , 
+					GIANHAP = @GiaNhap , GIABANLE = @GiaBanLe , MAHSX = @MaHSX , MANHACC = @MaNhaCC
+			WHERE MAPHIEUNHAP = @MaPhieuNhap AND MATHUOC = @MaThuoc
+			
+			-- cập nhật lại số lượng của thuốc được thêm vào mã phiếu nhập
+			DECLARE @SoLuongTon INT = 0
+			SET @SoLuongTon = (SELECT SOLUONGTON FROM dbo.THUOC WHERE MATHUOC = @MaThuoc)
+			UPDATE dbo.THUOC SET SOLUONGTON = (@SoLuongTon+@SoLuong) WHERE MATHUOC = @MaThuoc
+		END TRY
+		BEGIN CATCH
+			RAISERROR('Không cập nhật được chi tiết phiếu nhập thuốc',16,1)
+			ROLLBACK TRAN
+		END CATCH
+	COMMIT TRAN 
+	RETURN 0
+ END 
+
+ GO
+ 
+ SELECT * FROM dbo.THUOC
+ GO
+
+ SELECT * FROM dbo.PHIEUKHAM
+ GO
+ 
+ UPDATE dbo.PHIEUKHAM SET HOANTHANH = 0
+ GO
+ 
+ INSERT INTO dbo.PHIEUKHAM
+         ( MABN ,
+           MANV ,
+           NVTIEPNHAN ,
+           CHUANDOAN ,
+           MAHINHTHUCKHAM ,
+           NHIPTIM ,
+           NHIETDO ,
+           HUYETAP ,
+           CANNANG ,
+           CHIEUCAO ,
+           MAICD ,
+           NGAYKHAM ,
+           HOANTHANH ,
+           DATHANHTOAN ,
+           KETLUAN
+         )
+ VALUES  ( 0 , -- MABN - int
+           0 , -- MANV - int
+           0 , -- NVTIEPNHAN - int
+           N'' , -- CHUANDOAN - nvarchar(250)
+           0 , -- MAHINHTHUCKHAM - int
+           N'' , -- NHIPTIM - nvarchar(10)
+           N'' , -- NHIETDO - nvarchar(10)
+           N'' , -- HUYETAP - nvarchar(10)
+           0 , -- CANNANG - int
+           0 , -- CHIEUCAO - int
+           N'' , -- MAICD - nvarchar(10)
+           GETDATE() , -- NGAYKHAM - date
+           0 , -- HOANTHANH - int
+           NULL , -- DATHANHTOAN - bit
+           N''  -- KETLUAN - nvarchar(50)
+         )
+GO
+
+SELECT * FROM dbo.DONTHUOC WHERE MAPHIEUKHAM = 9
+SELECT * FROM dbo.CHITIETDONTHUOC WHERE MADONTHUOC = 9
