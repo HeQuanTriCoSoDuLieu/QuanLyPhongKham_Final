@@ -45,7 +45,7 @@ namespace QuanLyPhongKham.Repository.ADO
 
         public bool InsertThuoc(Thuoc thuoc)
         {
-            int row = DataProvider.Instane.ExecuteNonQuery("EXEC dbo.SP_InserThuoc @TenThuoc , @LoaiThuoc , @DonViTinh , @SoLuongTon , @GhiChu ", new object[] {thuoc.TenThuoc, thuoc.LoaiThuoc, thuoc.DonViTinh, thuoc.SoLuongTon, thuoc.GhiChu });
+            int row = DataProvider.Instane.ExecuteNonQuery("EXEC dbo.SP_InsertThuocAdmin @TenThuoc , @LoaiThuoc , @DonViTinh , @SoLuongTon , @GhiChu ", new object[] {thuoc.TenThuoc, thuoc.LoaiThuoc, thuoc.DonViTinh, 0, thuoc.GhiChu });
             return row > 0;
         }
 
