@@ -32,8 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>hospital.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>QuanLyPhongKham.Winform.Program</StartupObject>
@@ -244,6 +243,7 @@
     <Content Include="Assets\Images\user-icon.png" />
     <Content Include="Assets\Images\User-Interface-Password-icon.png" />
     <Content Include="Assets\Images\user_male2-64.png" />
+    <Content Include="hospital.ico" />
     <None Include="Resources\TEST.jpg" />
   </ItemGroup>
   <ItemGroup>

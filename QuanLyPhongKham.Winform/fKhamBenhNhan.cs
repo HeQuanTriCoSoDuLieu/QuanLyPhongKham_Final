@@ -149,14 +149,13 @@ namespace QuanLyPhongKham.Winform
 
                 //đổ dữ liệu vào bảng đơn thuốc
 
-                List<ChiTietDonThuoc_Thuoc> listdonthuoc = new List<ChiTietDonThuoc_Thuoc>();
-                listdonthuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
+                sttListChiTietDonThuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
                 dgvdonthuoc.Rows.Clear();
-                for (int i = 0; i < listdonthuoc.Count; i++)
+                for (int i = 0; i < sttListChiTietDonThuoc.Count; i++)
                 {
-                    listdonthuoc[i].STT = i + 1;
+                    sttListChiTietDonThuoc[i].STT = i + 1;
                 }
-                foreach (var item in listdonthuoc)
+                foreach (var item in sttListChiTietDonThuoc)
                 {
                     dgvdonthuoc.Rows.Add(item.STT, item.MATHUOC, item.TENTHUOC, item.SOLUONG, item.HUONGDAN);
                 }
@@ -209,8 +208,7 @@ namespace QuanLyPhongKham.Winform
 
 
                 //đổ dữ liệu vào bảng đơn thuốc
-
-                List<ChiTietDonThuoc_Thuoc> listdonthuoc = new List<ChiTietDonThuoc_Thuoc>();              
+              
                 sttListChiTietDonThuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
                 dgvdonthuoc.Rows.Clear();
                 int stt = 1;
@@ -966,6 +964,7 @@ namespace QuanLyPhongKham.Winform
             return listdt;
         }
 
+       
 
 
 
