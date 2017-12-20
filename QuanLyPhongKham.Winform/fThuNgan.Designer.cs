@@ -56,6 +56,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.btnThuDonThuoc = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.đổiMâtKhẩuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -79,6 +80,7 @@
             // hệThốngToolStripMenuItem
             // 
             this.hệThốngToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.đổiMâtKhẩuToolStripMenuItem,
             this.đăngXuấtToolStripMenuItem});
             this.hệThốngToolStripMenuItem.Name = "hệThốngToolStripMenuItem";
             this.hệThốngToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
@@ -87,7 +89,7 @@
             // đăngXuấtToolStripMenuItem
             // 
             this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             this.đăngXuấtToolStripMenuItem.Click += new System.EventHandler(this.đăngXuấtToolStripMenuItem_Click);
             // 
@@ -323,6 +325,13 @@
             this.dataGridView2.Size = new System.Drawing.Size(845, 380);
             this.dataGridView2.TabIndex = 1;
             // 
+            // đổiMâtKhẩuToolStripMenuItem
+            // 
+            this.đổiMâtKhẩuToolStripMenuItem.Name = "đổiMâtKhẩuToolStripMenuItem";
+            this.đổiMâtKhẩuToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.đổiMâtKhẩuToolStripMenuItem.Text = "Đổi mât khẩu";
+            this.đổiMâtKhẩuToolStripMenuItem.Click += new System.EventHandler(this.đổiMâtKhẩuToolStripMenuItem_Click);
+            // 
             // fThuNgan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -378,5 +387,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.ToolStripMenuItem đổiMâtKhẩuToolStripMenuItem;
     }
 }

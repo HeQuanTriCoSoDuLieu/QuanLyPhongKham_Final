@@ -18,6 +18,7 @@ namespace QuanLyPhongKham.Winform
         private static List<PhieuKhamGUI> listPhieuKham;
         public static BenhNhan benhNhanStatic;
 
+
         /// <summary>
         /// constructor
         /// </summary>
@@ -34,6 +35,7 @@ namespace QuanLyPhongKham.Winform
             libraryService = ServiceFactory.GetLibraryService(LibraryParameter.persistancestrategy);
             benhNhanStatic = new BenhNhan();
             this.nhanVien = nhanVien;
+
         }
 
         /// <summary>
@@ -129,6 +131,17 @@ namespace QuanLyPhongKham.Winform
             f.ShowDialog();
             this.Show();
 
+        }
+
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void đổiMặtKhẩuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fDoiMatKhauNhanVien f = new fDoiMatKhauNhanVien(nhanVien.TenDangNhap,nhanVien.MaNV);
+            f.ShowDialog();
         }
 
         #endregion MenuStrip Events
@@ -343,11 +356,6 @@ namespace QuanLyPhongKham.Winform
                     tabControl1.SelectTab(1);
                 }
             }
-        }
-
-        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

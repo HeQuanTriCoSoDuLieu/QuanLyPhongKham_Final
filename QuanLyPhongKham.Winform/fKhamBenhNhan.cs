@@ -24,7 +24,6 @@ namespace QuanLyPhongKham.Winform
         private static List<PhieuKham_BenhNhanLamSang> listphieukhambenhnhan;
         int manv, sttMaPhieu;
         string userName;
-        string passWord;
 
 
         private static List<ChiTietDonThuoc_Thuoc> sttListChiTietDonThuoc;
@@ -44,11 +43,10 @@ namespace QuanLyPhongKham.Winform
         #endregion
 
         #region Constructor 
-        public fKhamBenhNhan(int manv, string userName, string passWord)
+        public fKhamBenhNhan(int manv, string userName)
         {
             this.manv = manv;
             this.userName = userName;
-            this.passWord = passWord;
             InitializeComponent();
             libraryService = ServiceFactory.GetLibraryService(LibraryParameter.persistancestrategy);
             //khởi tạo list
@@ -869,8 +867,6 @@ namespace QuanLyPhongKham.Winform
             cbxquang.DataSource = libraryService.DanhSachLoaiCLS(a);
             cbxquang.ValueMember = "MACLS";
             cbxquang.DisplayMember = "TENCLS";
-
-
         }
 
         /// <summary>

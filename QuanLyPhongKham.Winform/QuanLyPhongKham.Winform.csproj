@@ -145,6 +145,12 @@
     <Compile Include="fDoiMatKhauNhanVien.Designer.cs">
       <DependentUpon>fDoiMatKhauNhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="fPhanQuyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fPhanQuyen.Designer.cs">
+      <DependentUpon>fPhanQuyen.cs</DependentUpon>
+    </Compile>
     <Compile Include="fTiepNhanBenhNhan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fLogin.resx">
       <DependentUpon>fLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fPhanQuyen.resx">
+      <DependentUpon>fPhanQuyen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fThuNgan.resx">
       <DependentUpon>fThuNgan.cs</DependentUpon>

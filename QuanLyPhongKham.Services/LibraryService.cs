@@ -97,6 +97,21 @@ namespace QuanLyPhongKham.Services
         {
             return taiKhoanRepository.DoiMatKhau(userName, passWord, newPassWord, manv);
         }
+        public List<TaiKhoan> DanhSachTaiKhoan()
+        {
+            return taiKhoanRepository.DanhSachTaiKhoan();
+        }
+        public int CapNhatTaiKhoan(int manv, string tendangnhap, string matkhau, string tenhienthi, int maphanquyen, int trangthai)
+        {
+            return taiKhoanRepository.CapNhatTaiKhoan(manv,tendangnhap,matkhau,tenhienthi,maphanquyen,trangthai);
+        }
+
+        public int ThemTaiKhoan(int manv, string tendangnhap, string matkhau, string tenhienthi, int maphanquyen, int trangthai)
+        {
+            return taiKhoanRepository.ThemTaiKhoan(manv, tendangnhap, matkhau, tenhienthi, maphanquyen, trangthai);
+
+        }
+
 
         #endregion Services cho tài khoản
 
@@ -450,10 +465,6 @@ namespace QuanLyPhongKham.Services
         {
             return loaiThuocRepository.DanhSachLoaiThuoc();
         }
-
-       
-
-
 
 
         #endregion

@@ -214,5 +214,11 @@ namespace QuanLyPhongKham.Winform
                 MessageBox.Show("Thêm phiếu nhập thất bại");
             }
         }
+
+        private void phânQuyềnTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fPhanQuyen f = new fPhanQuyen();
+            f.ShowDialog();
+        }
     }
 }

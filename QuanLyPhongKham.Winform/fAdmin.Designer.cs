@@ -64,6 +64,7 @@
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phânQuyềnTàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -85,6 +86,7 @@
             // hệThốngToolStripMenuItem
             // 
             this.hệThốngToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.phânQuyềnTàiKhoảnToolStripMenuItem,
             this.đăngXuấtToolStripMenuItem});
             this.hệThốngToolStripMenuItem.Name = "hệThốngToolStripMenuItem";
             this.hệThốngToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
@@ -93,7 +95,7 @@
             // đăngXuấtToolStripMenuItem
             // 
             this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             this.đăngXuấtToolStripMenuItem.Click += new System.EventHandler(this.đăngXuấtToolStripMenuItem_Click);
             // 
@@ -412,6 +414,13 @@
             this.Column16.Name = "Column16";
             this.Column16.ReadOnly = true;
             // 
+            // phânQuyềnTàiKhoảnToolStripMenuItem
+            // 
+            this.phânQuyềnTàiKhoảnToolStripMenuItem.Name = "phânQuyềnTàiKhoảnToolStripMenuItem";
+            this.phânQuyềnTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.phânQuyềnTàiKhoảnToolStripMenuItem.Text = "Phân quyền tài khoản";
+            this.phânQuyềnTàiKhoảnToolStripMenuItem.Click += new System.EventHandler(this.phânQuyềnTàiKhoảnToolStripMenuItem_Click);
+            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -476,5 +485,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.ToolStripMenuItem phânQuyềnTàiKhoảnToolStripMenuItem;
     }
 }

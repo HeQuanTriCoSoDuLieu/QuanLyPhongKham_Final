@@ -137,5 +137,11 @@ namespace QuanLyPhongKham.Winform
                 }
             }
         }
+
+        private void đổiMâtKhẩuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fDoiMatKhauNhanVien f = new fDoiMatKhauNhanVien(taiKhoan.TenDangNhap, taiKhoan.MaNV);
+            f.ShowDialog();
+        }
     }
 }
