@@ -32,12 +32,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>hospital.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>QuanLyPhongKham.Winform.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\QuanLyPhongKham\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
       <Private>True</Private>
@@ -252,7 +258,6 @@
     <Content Include="Assets\Images\user-icon.png" />
     <Content Include="Assets\Images\User-Interface-Password-icon.png" />
     <Content Include="Assets\Images\user_male2-64.png" />
-    <Content Include="hospital.ico" />
     <None Include="Resources\TEST.jpg" />
   </ItemGroup>
   <ItemGroup>

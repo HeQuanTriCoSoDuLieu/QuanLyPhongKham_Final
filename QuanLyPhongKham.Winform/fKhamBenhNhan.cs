@@ -416,44 +416,140 @@ namespace QuanLyPhongKham.Winform
 
             }
         }
-        private void btnxacnhanxetnghiem_Click(object sender, EventArgs e)
+        // xem kết quả nội sôi
+        private void btketquanoisoi_Click(object sender, EventArgs e)
+        {
+            string getmacls = cbnoisoi.SelectedValue.ToString();
+            string getphieunhap = txtmaphieukham.Text;
+            string mabn = txtmabenhnhan.Text;
+
+            try
+            {
+
+                ChiTietCLS cls = new ChiTietCLS();
+                cls = libraryService.LayketQua(getphieunhap, getmacls);
+                string ketqua = cls.KetQua.ToString();
+                string linkdannoisoi = @ketqua + "" + mabn + "" + getphieunhap;
+                // đưa dữ liệu từ file vào sieu am
+                // đọc từ file word
+                string file = link + "" + linkdannoisoi;
+                var word = new Microsoft.Office.Interop.Word.Application();
+                Microsoft.Office.Interop.Word.Document document = word.Documents.Open(file + "" + @"\ketqua.docx");
+                document.ActiveWindow.Selection.WholeStory();
+                document.ActiveWindow.Selection.Copy();
+                document.Close();
+                IDataObject data = Clipboard.GetDataObject();
+                txtmotonoisoi.Text = data.GetData(DataFormats.UnicodeText).ToString();
+
+                // chèn ảnh vào picturebox
+                string filepath1 = file + "" + @"\pcb1.jpg";
+
+                OpenFileDialog ofdImage1s = new OpenFileDialog();
+                pcbnoisoi1.SizeMode = PictureBoxSizeMode.StretchImage;
+                pcbnoisoi1.Image = Image.FromFile(filepath1.ToString());
+
+
+                string filepath2 = file + "" + @"\pcb2.jpg";
+
+                OpenFileDialog ofdImages2 = new OpenFileDialog();
+                pcbnoisoi2.SizeMode = PictureBoxSizeMode.StretchImage;
+                pcbnoisoi2.Image = Image.FromFile(filepath2.ToString());
+            }
+            catch
+            {
+                MessageBox.Show("Chưa có kết quả", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        // xem kết quả siêu âm
+        private void btketquasieuam_Click(object sender, EventArgs e)
+        {
+            string getmacls = cbsieuam.SelectedValue.ToString();
+            string getphieunhap = txtmaphieukham.Text;
+
+            string mabn = txtmabenhnhan.Text;
+            try
+            {
+                        ChiTietCLS cls = new ChiTietCLS();
+                        cls = libraryService.LayketQua(getphieunhap, getmacls);
+                        string ketqua = cls.KetQua.ToString();
+
+                        string linkdansieuam = @ketqua + "" + mabn + "" + getphieunhap;
+                        var word = new Microsoft.Office.Interop.Word.Application();
+                        Microsoft.Office.Interop.Word.Document document = word.Documents.Open(link + "" + @linkdansieuam + "" + @"\ketqua.docx");
+                        document.ActiveWindow.Selection.WholeStory();
+                        document.ActiveWindow.Selection.Copy();
+                        document.Close();
+                        IDataObject data = Clipboard.GetDataObject();
+                        txtmotasieuam.Text = data.GetData(DataFormats.UnicodeText).ToString();
+
+                        // chèn ảnh vào picturebox
+                        string filepath1 = link + "" + @linkdansieuam + "" + @"\pcb1.jpg";
+
+                        OpenFileDialog ofdImage1s = new OpenFileDialog();
+                        pcbsieuam1.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pcbsieuam1.Image = Image.FromFile(filepath1.ToString());
+
+
+                        string filepath2 = link + "" + @linkdansieuam + "" + @"\pcb2.jpg";
+
+                        OpenFileDialog ofdImages2 = new OpenFileDialog();
+                        pcbsieuam1.SizeMode = PictureBoxSizeMode.StretchImage;
+                        pcbsieuam2.Image = Image.FromFile(filepath2.ToString());
+            }
+            catch
+            {
+                MessageBox.Show("Chưa có kết quả", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        // xem kết quả x quang
+        private void btketquaxquang_Click(object sender, EventArgs e)
+        {
+            string getmacls = cbxquang.SelectedValue.ToString();
+            string getphieunhap = txtmaphieukham.Text;
+            string mabn = txtmabenhnhan.Text;
+            try
+            {
+                ChiTietCLS cls = new ChiTietCLS();
+                cls = libraryService.LayketQua(getphieunhap, getmacls);
+                string ketqua = cls.KetQua.ToString();
+                string linkdanxquang = @ketqua + "" + mabn + "" + getphieunhap;
+                // chèn ảnh vào picturebox
+                string filepath1 = link + "" + @linkdanxquang + "" + @"\pcb1.jpg";
+                OpenFileDialog ofdImage1s = new OpenFileDialog();
+                pcbxquang1.SizeMode = PictureBoxSizeMode.StretchImage;
+                pcbxquang1.Image = Image.FromFile(filepath1.ToString());
+
+                string filepath2 = link + "" + @linkdanxquang + "" + @"\pcb2.jpg";
+                OpenFileDialog ofdImages2 = new OpenFileDialog();
+                 pcbxquang1.SizeMode = PictureBoxSizeMode.StretchImage;
+                 pcbxquang2.Image = Image.FromFile(filepath2.ToString());
+            }
+            catch
+            {
+                MessageBox.Show("Chưa có kết quả", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        // xem kết quả xét nghiệm
+        private void btkqxetnghiem_Click(object sender, EventArgs e)
         {
             string getmacls = cbxetnghiem.SelectedValue.ToString();
             string getphieunhap = txtmaphieukham.Text;
-            string linkxetnghiem = "File\\Xet-nghiem\\XN";
-
             string mabn = txtmabenhnhan.Text;
-            if(getphieunhap != "")
+            try
             {
-                int result = libraryService.InsertChiTietCLS(getphieunhap, getmacls, linkxetnghiem);
                 ChiTietCLS cls = new ChiTietCLS();
                 cls = libraryService.LayketQua(getphieunhap, getmacls);
                 string ketqua = cls.KetQua.ToString();
                 string linkdanxetnghiem = @ketqua + "" + mabn + "" + getphieunhap;
-
-                if (result > 0)
-                {
-                    MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    // đưa dữ liệu từ file vào sieu am
-                    // đọc từ file word
-
-                    try
-                    {
-                        string file = link + "" + @linkdanxetnghiem + "" + @"\ketqua.xlsx";
+                string file = link + "" + @linkdanxetnghiem + "" + @"\ketqua.xlsx";
                         dgvketquaxetnghiem.DataSource = libraryService.GetCLS(file);
                         dgvdsphieukham.RowHeadersVisible = false;
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Cập nhật thất bại, đã có sẳn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
             }
-
-
+            catch
+            {
+                MessageBox.Show("Chưa có kết quả", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+                
         }
         private void btntimthuoc_Click(object sender, EventArgs e)
         {
@@ -483,7 +579,7 @@ namespace QuanLyPhongKham.Winform
                     ctdtt.HUONGDAN = txtghichudonthuoc.Text;
                     sttListChiTietDonThuoc.Add(ctdtt);
 
-                    sttListChiTietDonThuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
+                    //sttListChiTietDonThuoc = libraryService.DanhSachChiTietDonThuoc(maphieu);
                     if (DgvDonThuoc(int.Parse(txtchonthuoc.Text)) == false)
                     {
                         {
@@ -531,37 +627,13 @@ namespace QuanLyPhongKham.Winform
             if (getphieunhap != "")
             {
                 int result = libraryService.InsertChiTietCLS(getphieunhap, getmacls, linkxquang);
-                ChiTietCLS cls = new ChiTietCLS();
-                cls = libraryService.LayketQua(getphieunhap, getmacls);
-
-                string ketqua = cls.KetQua.ToString();
-
-                string linkdanxquang = @ketqua + "" + mabn + "" + getphieunhap;
                 if (result > 0)
                 {
                     MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                {
-                    try
                     {
-
-                        // chèn ảnh vào picturebox
-                        string filepath1 = link + "" + @linkdanxquang + "" + @"\pcb1.jpg";
-                        OpenFileDialog ofdImage1s = new OpenFileDialog();
-                        pcbxquang1.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pcbxquang1.Image = Image.FromFile(filepath1.ToString());
-
-
-                        string filepath2 = link + "" + @linkdanxquang + "" + @"\pcb2.jpg";
-                        OpenFileDialog ofdImages2 = new OpenFileDialog();
-                        pcbxquang1.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pcbxquang2.Image = Image.FromFile(filepath2.ToString());
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Cập nhật thất bại, đã có sẳn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    MessageBox.Show("Cập nhật thất bại, đã có sẳn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -579,57 +651,20 @@ namespace QuanLyPhongKham.Winform
 
             if (getphieunhap != "")
             {
-                int result = libraryService.InsertChiTietCLS(getphieunhap, getmacls, linknoisoi);
-                ChiTietCLS cls = new ChiTietCLS();
-                cls = libraryService.LayketQua(getphieunhap, getmacls);
-                string ketqua = cls.KetQua.ToString();
-                string linkdannoisoi = @ketqua + "" + mabn + "" + getphieunhap;  
+                int result = libraryService.InsertChiTietCLS(getphieunhap, getmacls, linknoisoi); 
                 if (result > 0)
                 {
                     MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                {
-                    try
                     {
-                        // đưa dữ liệu từ file vào sieu am
-                        // đọc từ file word
-                        string file = link + "" + linkdannoisoi;
-                        var word = new Microsoft.Office.Interop.Word.Application();
-                        Microsoft.Office.Interop.Word.Document document = word.Documents.Open(file + "" + @"\ketqua.docx");
-                        document.ActiveWindow.Selection.WholeStory();
-                        document.ActiveWindow.Selection.Copy();
-                        document.Close();
-                        IDataObject data = Clipboard.GetDataObject();
-                        txtmotonoisoi.Text = data.GetData(DataFormats.UnicodeText).ToString();
-
-                        // chèn ảnh vào picturebox
-                        string filepath1 = file + "" + @"\pcb1.jpg";
-
-                        OpenFileDialog ofdImage1s = new OpenFileDialog();
-                        pcbnoisoi1.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pcbnoisoi1.Image = Image.FromFile(filepath1.ToString());
-
-
-                        string filepath2 = file + "" + @"\pcb2.jpg";
-
-                        OpenFileDialog ofdImages2 = new OpenFileDialog();
-                        pcbnoisoi2.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pcbnoisoi2.Image = Image.FromFile(filepath2.ToString());
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Cập nhật thất bại, đã có sẳn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    MessageBox.Show("Cập nhật thất bại, đã có sẳn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-            }
+                }
             else
             {
                 MessageBox.Show("Không được để trống phiếu khám", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
         }
         private void btnxacnhansieuam_Click_1(object sender, EventArgs e)
         {
@@ -641,49 +676,37 @@ namespace QuanLyPhongKham.Winform
             if(getphieunhap != "")
             {
                 int result = libraryService.InsertChiTietCLS(getphieunhap, getmacls, linksieuam);
-                ChiTietCLS cls = new ChiTietCLS();
-                cls = libraryService.LayketQua(getphieunhap, getmacls);
-                string ketqua = cls.KetQua.ToString();
+                if (result > 0)
+                {
+                    MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    {
+                    MessageBox.Show("Cập nhật thất bại, đã có sẳn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không được để trống phiếu khám", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void btnxacnhanxetnghiem_Click(object sender, EventArgs e)
+        {
+            string getmacls = cbxetnghiem.SelectedValue.ToString();
+            string getphieunhap = txtmaphieukham.Text;
+            string linkxetnghiem = "File\\Xet-nghiem\\XN";
 
-                string linkdansieuam = @ketqua + "" + mabn + "" + getphieunhap;
-
+            string mabn = txtmabenhnhan.Text;
+            if (getphieunhap != "")
+            {
+                int result = libraryService.InsertChiTietCLS(getphieunhap, getmacls, linkxetnghiem);
                 if (result > 0)
                 {
                     MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    // đưa dữ liệu từ file vào sieu am
-                    // đọc từ file word
-                    try
-                    {
-
-                        var word = new Microsoft.Office.Interop.Word.Application();
-                        Microsoft.Office.Interop.Word.Document document = word.Documents.Open(link + "" + @linkdansieuam + "" + @"\ketqua.docx");
-                        document.ActiveWindow.Selection.WholeStory();
-                        document.ActiveWindow.Selection.Copy();
-                        document.Close();
-                        IDataObject data = Clipboard.GetDataObject();
-                        txtmotasieuam.Text = data.GetData(DataFormats.UnicodeText).ToString();
-
-                        // chèn ảnh vào picturebox
-                        string filepath1 = link + "" + @linkdansieuam + "" + @"\pcb1.jpg";
-
-                        OpenFileDialog ofdImage1s = new OpenFileDialog();
-                        pcbsieuam1.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pcbsieuam1.Image = Image.FromFile(filepath1.ToString());
-
-
-                        string filepath2 = link + "" + @linkdansieuam + "" + @"\pcb2.jpg";
-
-                        OpenFileDialog ofdImages2 = new OpenFileDialog();
-                        pcbsieuam1.SizeMode = PictureBoxSizeMode.StretchImage;
-                        pcbsieuam2.Image = Image.FromFile(filepath2.ToString());
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Cập nhật thất bại, đã có sẳn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                        MessageBox.Show("Cập nhật thất bại, đã có sẳn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -699,26 +722,18 @@ namespace QuanLyPhongKham.Winform
             mItem.Click += MItem_Click;
             ctx.MenuItems.Add(mItem);
 
-
-    
-
             if (e.Button == MouseButtons.Right)
             {
                 System.Drawing.Point pt = new System.Drawing.Point(e.X, e.Y);
                 ctx.Show(dgvdonthuoc, pt);
             }
         }
-
         private void MItem_Click(object sender, EventArgs e)
         {
             int maThuoc = (int)dgvdonthuoc.SelectedRows[0].Cells[1].Value;
             dgvdonthuoc.Rows.RemoveAt(dgvdonthuoc.CurrentRow.Index);
-
-
             if (dgvdonthuoc.SelectedRows.Count > 0)
             {
-
-
                 var dt = sttListChiTietDonThuoc.Find(p => p.MATHUOC == maThuoc);
                 if (dt != null)
                 {
@@ -732,13 +747,11 @@ namespace QuanLyPhongKham.Winform
                 }
             }
         }
-
         private void tsmi_doimatkhau_Click(object sender, EventArgs e)
         {
             fDoiMatKhauNhanVien f = new fDoiMatKhauNhanVien(userName,manv);
             f.ShowDialog();             
         }
-
         private void tsmi_dangxuat_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -810,9 +823,6 @@ namespace QuanLyPhongKham.Winform
             cbnoisoi.DataSource = libraryService.DanhSachLoaiCLS(a);
             cbnoisoi.ValueMember = "MACLS";
             cbnoisoi.DisplayMember = "TENCLS";
-
-
-
         }
 
         /// <summary>
@@ -835,13 +845,11 @@ namespace QuanLyPhongKham.Winform
         /// </summary>
         private void dulieuxetnghiem()
         {
-
             // đưa dữ liệu vào combobox
             int a = 2;
             cbxetnghiem.DataSource = libraryService.DanhSachLoaiCLS(a);
             cbxetnghiem.ValueMember = "MACLS";
             cbxetnghiem.DisplayMember = "TENCLS";
-
         }
 
         /// <summary>
@@ -867,6 +875,10 @@ namespace QuanLyPhongKham.Winform
             cbxquang.DataSource = libraryService.DanhSachLoaiCLS(a);
             cbxquang.ValueMember = "MACLS";
             cbxquang.DisplayMember = "TENCLS";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 389886f24a89383a6f75263f38576e761e66114b
         }
 
         /// <summary>
