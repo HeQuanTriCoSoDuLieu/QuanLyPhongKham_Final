@@ -21,6 +21,7 @@ namespace QuanLyPhongKham.Winform
         public fTimKiemThuoc()
         {
             InitializeComponent();
+            cbxnhomthuoc.SelectedIndex = 0;
             libraryService = ServiceFactory.GetLibraryService(LibraryParameter.persistancestrategy);
 
         }
