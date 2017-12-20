@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Lịch sử khám                                  ");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Khám lâm sàng                              ");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("X - Quang                                   ");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Siêu Âm                                     ");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Xét nghiệm                                ");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Nội sôi                                       ");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Khám cận lâm sàng                       ", new System.Windows.Forms.TreeNode[] {
-            treeNode27,
-            treeNode28,
-            treeNode29,
-            treeNode30});
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Đơn thuốc                                       ");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Lịch sử khám                                  ");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Khám lâm sàng                              ");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("X - Quang                                   ");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Siêu Âm                                     ");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Xét nghiệm                                ");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Nội sôi                                       ");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Khám cận lâm sàng                       ", new System.Windows.Forms.TreeNode[] {
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Đơn thuốc                                       ");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_lichsulamviec = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +47,6 @@
             this.tsmi_dangxuat = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHoanthanh = new System.Windows.Forms.Button();
-            this.btnxuatdonthuoc = new System.Windows.Forms.Button();
             this.btnluuphieukham = new System.Windows.Forms.Button();
             this.panelchinh = new System.Windows.Forms.Panel();
             this.panelsieuam = new System.Windows.Forms.Panel();
@@ -228,7 +227,6 @@
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.btnHoanthanh);
-            this.panel1.Controls.Add(this.btnxuatdonthuoc);
             this.panel1.Controls.Add(this.btnluuphieukham);
             this.panel1.Controls.Add(this.panelchinh);
             this.panel1.Controls.Add(this.panel3);
@@ -241,7 +239,7 @@
             // btnHoanthanh
             // 
             this.btnHoanthanh.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHoanthanh.Location = new System.Drawing.Point(635, 602);
+            this.btnHoanthanh.Location = new System.Drawing.Point(768, 602);
             this.btnHoanthanh.Name = "btnHoanthanh";
             this.btnHoanthanh.Size = new System.Drawing.Size(103, 44);
             this.btnHoanthanh.TabIndex = 23;
@@ -249,20 +247,10 @@
             this.btnHoanthanh.UseVisualStyleBackColor = true;
             this.btnHoanthanh.Click += new System.EventHandler(this.btnHoanthanh_Click);
             // 
-            // btnxuatdonthuoc
-            // 
-            this.btnxuatdonthuoc.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnxuatdonthuoc.Location = new System.Drawing.Point(895, 602);
-            this.btnxuatdonthuoc.Name = "btnxuatdonthuoc";
-            this.btnxuatdonthuoc.Size = new System.Drawing.Size(103, 44);
-            this.btnxuatdonthuoc.TabIndex = 21;
-            this.btnxuatdonthuoc.Text = "XUẤT ĐƠN THUỐC";
-            this.btnxuatdonthuoc.UseVisualStyleBackColor = true;
-            // 
             // btnluuphieukham
             // 
             this.btnluuphieukham.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnluuphieukham.Location = new System.Drawing.Point(765, 602);
+            this.btnluuphieukham.Location = new System.Drawing.Point(912, 602);
             this.btnluuphieukham.Name = "btnluuphieukham";
             this.btnluuphieukham.Size = new System.Drawing.Size(103, 44);
             this.btnluuphieukham.TabIndex = 20;
@@ -1272,35 +1260,35 @@
             this.treeviewdvkham.ItemHeight = 25;
             this.treeviewdvkham.Location = new System.Drawing.Point(3, 0);
             this.treeviewdvkham.Name = "treeviewdvkham";
-            treeNode25.Name = "nodelskham";
-            treeNode25.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode25.Text = "Lịch sử khám                                  ";
-            treeNode26.Name = "nodelamsang";
-            treeNode26.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            treeNode26.Text = "Khám lâm sàng                              ";
-            treeNode27.Name = "nodexquang";
-            treeNode27.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            treeNode27.Text = "X - Quang                                   ";
-            treeNode28.Name = "nodesieuam";
-            treeNode28.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            treeNode28.Text = "Siêu Âm                                     ";
-            treeNode29.Name = "nodexetnghiem";
-            treeNode29.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            treeNode29.Text = "Xét nghiệm                                ";
-            treeNode30.Name = "nodenoisoi";
-            treeNode30.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            treeNode30.Text = "Nội sôi                                       ";
-            treeNode31.Name = "nodekhamcanlamsang";
-            treeNode31.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            treeNode31.Text = "Khám cận lâm sàng                       ";
-            treeNode32.Name = "nodedonthuoc";
-            treeNode32.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            treeNode32.Text = "Đơn thuốc                                       ";
+            treeNode1.Name = "nodelskham";
+            treeNode1.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            treeNode1.Text = "Lịch sử khám                                  ";
+            treeNode2.Name = "nodelamsang";
+            treeNode2.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            treeNode2.Text = "Khám lâm sàng                              ";
+            treeNode3.Name = "nodexquang";
+            treeNode3.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            treeNode3.Text = "X - Quang                                   ";
+            treeNode4.Name = "nodesieuam";
+            treeNode4.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            treeNode4.Text = "Siêu Âm                                     ";
+            treeNode5.Name = "nodexetnghiem";
+            treeNode5.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            treeNode5.Text = "Xét nghiệm                                ";
+            treeNode6.Name = "nodenoisoi";
+            treeNode6.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            treeNode6.Text = "Nội sôi                                       ";
+            treeNode7.Name = "nodekhamcanlamsang";
+            treeNode7.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            treeNode7.Text = "Khám cận lâm sàng                       ";
+            treeNode8.Name = "nodedonthuoc";
+            treeNode8.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            treeNode8.Text = "Đơn thuốc                                       ";
             this.treeviewdvkham.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode25,
-            treeNode26,
-            treeNode31,
-            treeNode32});
+            treeNode1,
+            treeNode2,
+            treeNode7,
+            treeNode8});
             this.treeviewdvkham.Size = new System.Drawing.Size(248, 452);
             this.treeviewdvkham.TabIndex = 0;
             this.treeviewdvkham.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeviewdichvukham);
@@ -1539,7 +1527,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txtmabenhnhan;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnxuatdonthuoc;
         private System.Windows.Forms.Panel panellichsukham;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView dgvlichsukham;
